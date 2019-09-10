@@ -15,6 +15,9 @@ class CityController extends Controller
 {
     public function show(City $city){
         return $city->toJson();
-        // return json_encode(DB::table('City')->get($id));
+    }
+
+    public function index(){
+        return City::all()->toJson();
     }
 }
