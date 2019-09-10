@@ -17,8 +17,9 @@ class CreateCitiesTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->text('description');
-            $table->string('localisation');
-            $table->string('filename');
+            $table->string('location');
+            $table->double('budget');
+            $table->string('filename')->nullable();
             $table->integer('temperature');
             $table->timestamps();
         });

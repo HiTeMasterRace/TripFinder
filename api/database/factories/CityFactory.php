@@ -18,10 +18,5 @@ use Faker\Generator as Faker;
 
 $factory->define(City::class, function (Faker $faker) {
     return [
-        'name' => $faker->name,
-        'description' => $faker->paragraph($nbSentences = 3, $variableNbSentences = true),
-        'localisation' => "90, 90",
-        'filename' => 'not_existing.png',
-        'temperature' => $faker->numberBetween(-20, 40)
     ];
 });
