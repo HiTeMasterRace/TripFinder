@@ -77,7 +77,7 @@ Un voyage d’affaires à organiser à Moscou ? La capitale Russe, où vient de 
             'temperature'=>23
         ]);
         factory(City::class)->create([
-            'name'=>'Cuba',
+            'name'=>'La Havane',
             'budget'=>511,
             'location'=>'23.1330200, -82.3830400',
             'description'=>'Cuba est un État insulaire communiste des Caraïbes. On y trouve des plages de sable spectaculaires et des champs de tabac pour la production des cigares légendaires. La capitale, La Havane, est riche de maisons aux façades pastel, de voitures des années 1950 et d\'une architecture hispano-coloniale du XVIe siècle dans la vieille Havane. On peut écouter de la salsa dans des clubs de danse et assister à des spectacles de cabaret au célèbre Tropicana.',
