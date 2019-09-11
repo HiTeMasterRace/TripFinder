@@ -21,3 +21,4 @@ Route::get('cities', 'CityController@index');
 Route::get('continents', 'ContinentController@index');
 Route::get('countries', 'CountryController@index');
 Route::get('countries/{country}', 'CountryController@show');
+Route::get('search', 'CityController@search');
