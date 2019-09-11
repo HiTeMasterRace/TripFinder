@@ -17,7 +17,7 @@ class Form extends Component {
     render() {
         switch (this.props.criteria) {
             case "Budget":
-                return <Range min={this.props.budget[0]} max={this.props.budget[1]} onChange={this.props.handleRange} />
+                return <Range defaultValue={this.props.budget} value={this.props.budget} onChange={this.props.handleRange} />
             case "Lieu":
                 return (
                     <div>
@@ -40,7 +40,7 @@ class Form extends Component {
                     </div>
                 );
             case "Température":
-                return <Range min={this.props.temp[0]} max={this.props.temp[1]} onChange={this.props.handleRange} />
+                return <Range temp={this.props.temp} onChange={this.props.handleRange} />
             case "Type":
                 return (
                     <form>

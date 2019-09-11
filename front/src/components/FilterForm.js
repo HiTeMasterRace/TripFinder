@@ -9,7 +9,11 @@ const Range = Slider.Range
 class FilterForm extends Component {
     state = {
         continents: [],
-        countries: []
+        countries: [],
+        minBudget: 10,
+        maxBudget: 1000,
+        minTemp: -10,
+        maxTemp: 35,
     }
 
     switchForm = (critere) => {
@@ -20,8 +24,23 @@ class FilterForm extends Component {
         document.querySelector('.active').classList.remove('active');
 
         elemLI.classList.add('active');
+    }
+
+    handleBudget = (value) => {
+        this.setState({
+            minBudget: value[0],
+            maxBudget: value[1],
+        })
+    }
+
+    handleTemp = (value) => {
+        this.setState({
+            minTemp: value[0],
+            maxTemp: value[1],
+        })
         elemUL.style.transform = "translateX(-" + pos * elemLI.offsetWidth + "px)";
     }
+
     render() {
         return (
             <div className="containerCarousel">
@@ -35,7 +54,8 @@ class FilterForm extends Component {
                 <div className="carousel_wrapper">
                     <ul className="ul_carousel">
                         <li className="li_price active" data-position="0">
-                            <Range min={this.props.budget[0]} max={this.props.budget[1]} onChange={this.props.handleRange} />
+                            <Range defaultValue={[10, 1000]} min={10} max={1000} onChange={this.handleBudget} />
+                            <p>{this.state.minBudget}€ -> {this.state.maxBudget}€</p>
                         </li>
                         <li className="li_place" data-position="1">
                             <select name="continents" onChange={this.props.handle}>
@@ -56,7 +76,8 @@ class FilterForm extends Component {
                             </select>
                         </li>
                         <li className="li_temp" data-position="2">
-                            <Range min={this.props.temp[0]} max={this.props.temp[1]} onChange={this.props.handleRange} />
+                            <Range defaultValue={[-10, 35]} min={-10} max={35} onChange={this.handleTemp} />
+                            <p>{this.state.minTemp}°C -> {this.state.maxTemp}°C</p>
                         </li>
                         <li className="li_type" data-position="3"></li>
                     </ul>
