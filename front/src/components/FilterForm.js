@@ -24,6 +24,7 @@ class FilterForm extends Component {
         document.querySelector('.active').classList.remove('active');
 
         elemLI.classList.add('active');
+        elemUL.style.transform = "translateX(-" + pos * elemLI.offsetWidth + "px)";
     }
 
     handleBudget = (value) => {
@@ -38,7 +39,6 @@ class FilterForm extends Component {
             minTemp: value[0],
             maxTemp: value[1],
         })
-        elemUL.style.transform = "translateX(-" + pos * elemLI.offsetWidth + "px)";
     }
 
     render() {
