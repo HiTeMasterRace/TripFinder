@@ -12,11 +12,35 @@
   .App .vertical-center {
     margin: 0 auto;
     width: fit-content; }
-    .App .vertical-center .container_main {
-      display: block; }
-  .App .PaperPlane {
-    width: 150px;
-    height: 230px;
-    box-shadow: 0 0 12px #cccccc;
-    margin: 0 auto;
-    transform: perspective(400px) rotateY(45deg); }
+  .App .containerCarousel .container_item {
+    display: flex;
+    justify-content: center; }
+  .App .containerCarousel .carousel_wrapper {
+    overflow: hidden;
+    width: 100px; }
+    .App .containerCarousel .carousel_wrapper .ul_carousel {
+      padding: 0;
+      width: 400px;
+      display: flex;
+      list-style: none;
+      transition: transform 1s; }
+      .App .containerCarousel .carousel_wrapper .ul_carousel li {
+        opacity: 0; }
+      .App .containerCarousel .carousel_wrapper .ul_carousel .active {
+        opacity: 1 !important; }
+      .App .containerCarousel .carousel_wrapper .ul_carousel .li_price {
+        width: 100px;
+        height: 50px;
+        background-color: blue; }
+      .App .containerCarousel .carousel_wrapper .ul_carousel .li_temp {
+        width: 100px;
+        height: 50px;
+        background-color: red; }
+      .App .containerCarousel .carousel_wrapper .ul_carousel .li_place {
+        width: 100px;
+        height: 50px;
+        background-color: yellow; }
+      .App .containerCarousel .carousel_wrapper .ul_carousel .li_type {
+        width: 100px;
+        height: 50px;
+        background-color: green; }

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import './../assets/css/App.css';
 
-import PaperPlane from './PaperPlane';
-import Criteria from './Criteria';
-import Form from './Form';
-import City from './City';
+// import PaperPlane from './PaperPlane';
+// import Criteria from './Criteria';
+// import Form from './Form';
+// import City from './City';
+import FilterForm from './FilterForm';
 
 class App extends Component {
   constructor(props) {
@@ -44,9 +45,10 @@ class App extends Component {
 
     return (
       <div className="App">
-        <PaperPlane />
-
-        <Criteria handle={this.handle} />
+        <div className="vertical-center">
+          <FilterForm />
+        </div>
+        {/* <Criteria handle={this.handle} />
 
         <Form criteria={this.state.criteria}/>
 
@@ -54,7 +56,7 @@ class App extends Component {
           <div key={city.id}>
             <City cityname={city.name} />
           </div>
-        ))}
+        ))} */}
       </div>
     );
   }
