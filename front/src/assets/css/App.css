@@ -17,10 +17,10 @@
     justify-content: center; }
   .App .containerCarousel .carousel_wrapper {
     overflow: hidden;
-    width: 100px; }
+    width: 300px; }
     .App .containerCarousel .carousel_wrapper .ul_carousel {
       padding: 0;
-      width: 400px;
+      width: 1200px;
       display: flex;
       list-style: none;
       transition: transform 1s; }
@@ -29,18 +29,18 @@
       .App .containerCarousel .carousel_wrapper .ul_carousel .active {
         opacity: 1 !important; }
       .App .containerCarousel .carousel_wrapper .ul_carousel .li_price {
-        width: 100px;
-        height: 50px;
+        width: 300px;
+        height: 300px;
         background-color: blue; }
       .App .containerCarousel .carousel_wrapper .ul_carousel .li_temp {
-        width: 100px;
-        height: 50px;
+        width: 300px;
+        height: 300px;
         background-color: red; }
       .App .containerCarousel .carousel_wrapper .ul_carousel .li_place {
-        width: 100px;
-        height: 50px;
+        width: 300px;
+        height: 300px;
         background-color: yellow; }
       .App .containerCarousel .carousel_wrapper .ul_carousel .li_type {
-        width: 100px;
-        height: 50px;
+        width: 300px;
+        height: 300px;
         background-color: green; }

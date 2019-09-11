@@ -12,32 +12,36 @@ class App extends Component {
     super(props);
     this.state = {
       cities: [
-        {
-          "id": 1,
-          "name": "Athenes",
-          "description": "no description yet",
-          "location": "unknown yet",
-          "budget": 140,
-          "filename": null,
-          "temperature": 22,
-          "created_at": "2019-09-10 14:03:29",
-          "updated_at": "2019-09-10 14:03:29"
-        }
+        // {
+        //   "id": 1,
+        //   "name": "Athenes",
+        //   "description": "no description yet",
+        //   "location": "unknown yet",
+        //   "budget": 140,
+        //   "filename": null,
+        //   "temperature": 22,
+        //   "created_at": "2019-09-10 14:03:29",
+        //   "updated_at": "2019-09-10 14:03:29"
+        // }
       ],
-      criteria: ""
+      criteria: "",
+      continent: "",
+      country: "",
+      budget: [10, 1000],
+      temp: [-10, 35],
     };
-
-    this.handle = this.handle.bind(this)
   }
 
-  getCities() {
-
-  }
-
-  handle(name, value) {
+  handle = (name, value) => {
     this.setState({
       [name]: value
     })
+
+    console.log(name, value)
+  }
+
+  handleRange = (value) => {
+    console.log(value)
   }
 
   render() {
@@ -46,11 +50,11 @@ class App extends Component {
     return (
       <div className="App">
         <div className="vertical-center">
-          <FilterForm />
+          <FilterForm criteria={this.state.criteria} budget={this.state.budget} temp={this.state.temp} handle={this.handle} handleRange={this.handleRange} />
         </div>
         {/* <Criteria handle={this.handle} />
 
-        <Form criteria={this.state.criteria}/>
+        <Form criteria={this.state.criteria} budget={this.state.budget} temp={this.state.temp} handle={this.handle} handleRange={this.handleRange} />
 
         {this.state.cities.map(city => (
           <div key={city.id}>

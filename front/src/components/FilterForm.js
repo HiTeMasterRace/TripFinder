@@ -1,6 +1,17 @@
 import React, { Component } from 'react';
 
+import Slider from 'rc-slider';
+
+import 'rc-slider/assets/index.css';
+
+const Range = Slider.Range
+
 class FilterForm extends Component {
+    state = {
+        continents: [],
+        countries: []
+    }
+
     switchForm = (critere) => {
         console.log(critere);
         const elemUL = document.querySelector('.ul_carousel');
@@ -9,7 +20,7 @@ class FilterForm extends Component {
         document.querySelector('.active').classList.remove('active');
 
         elemLI.classList.add('active');
-        elemUL.style.transform = "translateX(-" + pos * 100 + "px)";
+        elemUL.style.transform = "translateX(-" + pos * 300 + "px)";
 
 
     }
@@ -25,9 +36,30 @@ class FilterForm extends Component {
                 </div>
                 <div className="carousel_wrapper">
                     <ul className="ul_carousel">
-                        <li className="li_price active" data-position="0"></li>
-                        <li className="li_place" data-position="1"></li>
-                        <li className="li_temp" data-position="2"></li>
+                        <li className="li_price active" data-position="0">
+                            <Range min={this.props.budget[0]} max={this.props.budget[1]} onChange={this.props.handleRange} />
+                        </li>
+                        <li className="li_place" data-position="1">
+                            <select name="continents" onChange={this.props.handle}>
+                                <option value="">Sélectionner un continent</option>
+                                {this.state.continents.map((continent, index) => (
+                                    <option key={index} value={continent}>
+                                        {continent}
+                                    </option>
+                                ))}
+                            </select>
+                            <select name="country" onChange={this.props.handle}>
+                                <option value="">Sélectionner un pays</option>
+                                {this.state.countries.map((country, index) => (
+                                    <option key={index} value={country}>
+                                        {country}
+                                    </option>
+                                ))}
+                            </select>
+                        </li>
+                        <li className="li_temp" data-position="2">
+                            <Range min={this.props.temp[0]} max={this.props.temp[1]} onChange={this.props.handleRange} />
+                        </li>
                         <li className="li_type" data-position="3"></li>
                     </ul>
                 </div>
