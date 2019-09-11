@@ -15,6 +15,7 @@ class CreateCitiesTable extends Migration
     {
         Schema::create('cities', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('country_id');
             $table->string('name');
             $table->text('description')->nullable();
             $table->string('location')->nullable();
@@ -22,6 +23,11 @@ class CreateCitiesTable extends Migration
             $table->string('filename')->nullable();
             $table->integer('temperature');
             $table->timestamps();
+
+            $table->foreign('country_id')
+                ->references('id')
+                ->on('countries')
+                ->onDelete('cascade');
         });
     }
 

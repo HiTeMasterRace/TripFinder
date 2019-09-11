@@ -17,7 +17,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::get('cities/{city}', 'CityController@show');
-Route::get('cities',   'CityController@index');
-Route::get('continents',   'ContinentController@index');
-Route::get('types/{type}', 'TypeController@show' );
-Route::get('types', 'TypeController@index');
+Route::get('cities', 'CityController@index');
+Route::get('continents', 'ContinentController@index');
+Route::get('countries', 'CountryController@index');
+Route::get('countries/{country}', 'CountryController@show');

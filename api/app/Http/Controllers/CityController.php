@@ -13,11 +13,13 @@ use App\City;
 
 class CityController extends Controller
 {
-    public function show(City $city){
+    public function show(City $city)
+    {
         return $city->toJson();
     }
 
-    public function index(){
+    public function index()
+    {
         return City::all()->toJson();
     }
 }
