@@ -22,4 +22,9 @@ class CityController extends Controller
     {
         return City::all()->toJson();
     }
+
+    public function search()
+    {
+        
+    }
 }
