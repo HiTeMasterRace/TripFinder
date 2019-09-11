@@ -16,22 +16,24 @@ class App extends Component {
   }
 
   getCities() {
-    
+
   }
 
   render() {
     return (
       <div className="App">
-        <PaperPlane />
+        <div className="vertical-center">
+          <div className="container_main">
+            <PaperPlane />
+            {this.state.criteria.map((criteria, index) => (
+              <div key={index}>
+                <Criteria criteria={criteria} />
+              </div>
+            ))}
 
-        {this.state.criteria.map((criteria, index) => (
-          <div key={index}>
-            <Criteria criteria={criteria} />
+            <Form />
           </div>
-        ))}
-
-        <Form />
-
+        </div>
         {this.state.cities.map(city => (
           <div key={city.id}>
             <City cityname={city.name} />
