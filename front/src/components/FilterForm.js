@@ -20,9 +20,7 @@ class FilterForm extends Component {
         document.querySelector('.active').classList.remove('active');
 
         elemLI.classList.add('active');
-        elemUL.style.transform = "translateX(-" + pos * 300 + "px)";
-
-
+        elemUL.style.transform = "translateX(-" + pos * elemLI.offsetWidth + "px)";
     }
     render() {
         return (
