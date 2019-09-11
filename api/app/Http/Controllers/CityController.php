@@ -8,13 +8,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\CityCollection;
 use App\Http\Resources\CityResource;
 use App\City;
 
 class CityController extends Controller
 {
     public function show(City $city){
-        return new CityResource($city);
+        return new  CityResource($city);
     }
 
     public function index()
