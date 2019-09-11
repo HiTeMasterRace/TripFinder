@@ -8,14 +8,13 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Http\Resources\CityResource;
 use App\City;
 
 class CityController extends Controller
 {
-    public function show(City $city)
-    {
-        return $city->toJson();
+    public function show(City $city){
+        return new CityResource($city);
     }
 
     public function index()
@@ -23,8 +22,4 @@ class CityController extends Controller
         return City::all()->toJson();
     }
 
-    public function search()
-    {
-        
-    }
 }
