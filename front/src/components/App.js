@@ -1,24 +1,45 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './../assets/css/App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import PaperPlane from './PaperPlane';
+import Criteria from './Criteria';
+import Form from './Form';
+import City from './City';
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      cities: [],
+      criteria: ["budget", "type de voyage: culture, sport, montagne, mer, vie nocture", "continent", "temperature"]
+    };
+  }
+
+  getCities() {
+    
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <PaperPlane />
+
+        {this.state.criteria.map((criteria, index) => (
+          <div key={index}>
+            <Criteria criteria={criteria} />
+          </div>
+        ))}
+
+        <Form />
+
+        {this.state.cities.map(city => (
+          <div key={city.id}>
+            <City cityname={city.name} />
+          </div>
+        ))}
+      </div>
+    );
+  }
 }
 
 export default App;
