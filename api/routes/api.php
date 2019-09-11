@@ -18,3 +18,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 Route::get('cities/{city}', 'CityController@show');
 Route::get('cities',   'CityController@index');
+Route::get('continents',   'ContinentController@index');
