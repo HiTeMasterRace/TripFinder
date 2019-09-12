@@ -45,7 +45,8 @@ class UserController extends Controller
     }
 
     public function destroy($id){
-        if(User::find($id)){
+        $user = User::find($id);
+        if($user){
             $user->delete();
             return response('User deleted', 200)
                   ->header('Content-Type', 'text/plain');

@@ -30,16 +30,16 @@ class CityController extends Controller
 
         if(count($_GET) != 0){
             if($res['minTmp'] && $res['maxTmp']){
-                 $request = $request->whereBetween('temperature', [$res->minTmp,$res->maxTmp]);
+                $request = $request->whereBetween('temperature', [$res->minTmp,$res->maxTmp]);
             }
             if($res['name']){
-                 $request = $request->where('name', '=', $res->name);
+                $request = $request->where('name', '=', $res->name);
             }
             if($res['minBudget'] && $res['maxBudget']){
-                 $request = $request->whereBetween('budget', [$res->minBudget,$res->maxBudget]);
+                $request = $request->whereBetween('budget', [$res->minBudget,$res->maxBudget]);
             }
 
-            return  $request;
+            return  $request->flatten();
         }
         return $request;
     }
