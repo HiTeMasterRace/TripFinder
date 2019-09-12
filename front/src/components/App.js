@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './../assets/css/App.css';
 
-// import PaperPlane from './PaperPlane';
+//import PaperPlane from './PaperPlane';
 // import Criteria from './Criteria';
 // import Form from './Form';
 // import City from './City';
@@ -27,8 +27,10 @@ class App extends Component {
       criteria: "",
       continent: "",
       country: "",
-      budget: [10, 1000],
-      temp: [-10, 35],
+      minBudget: 0,
+      maxBudget: 0,
+      minTemp: 0,
+      maxTemp: 0,
     };
   }
 
@@ -36,22 +38,17 @@ class App extends Component {
     this.setState({
       [name]: value
     })
-
-    console.log(name, value)
-  }
-
-  handleRange = (value) => {
-    console.log(value)
   }
 
   render() {
-    console.log(this.state.criteria)
-
     return (
       <div className="App">
+        {/* <PaperPlane continent={this.state.continent} country={this.state.country} minBudget={this.state.minBudget} maxBudget={this.state.maxBudget} minTemp={this.state.minTemp} maxTemp={this.state.maxTemp} /> */}
+
         <div className="vertical-center">
-          <FilterForm criteria={this.state.criteria} budget={this.state.budget} temp={this.state.temp} handle={this.handle} handleRange={this.handleRange} />
+          <FilterForm criteria={this.state.criteria} budget={this.state.budget} temp={this.state.temp} handle={this.handle} handleBudget={this.handleBudget} handleTemp={this.handleTemp} />
         </div>
+
         {/* <Criteria handle={this.handle} />
 
         <Form criteria={this.state.criteria} budget={this.state.budget} temp={this.state.temp} handle={this.handle} handleRange={this.handleRange} />

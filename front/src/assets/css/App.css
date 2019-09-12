@@ -12,35 +12,132 @@
   .App .vertical-center {
     margin: 0 auto;
     width: fit-content; }
-  .App .containerCarousel .container_item {
-    display: flex;
-    justify-content: center; }
-  .App .containerCarousel .carousel_wrapper {
-    overflow: hidden;
-    width: 300px; }
-    .App .containerCarousel .carousel_wrapper .ul_carousel {
-      padding: 0;
-      width: 1200px;
+  .App .containerCarousel {
+    padding: 10px 50px 0 50px;
+    box-shadow: -27.1px 62.5px 125px -25px rgba(50, 50, 93, 0.5), -16.2px 37.5px 75px -37.5px rgba(0, 0, 0, 0.6);
+    border-radius: 12px 12px 0 0;
+    background-color: #87bbfd; }
+    .App .containerCarousel h1 {
+      font-family: Pacifico;
+      font-size: 50px;
+      font-weight: 300;
+      text-align: center; }
+    .App .containerCarousel .container_item {
       display: flex;
-      list-style: none;
-      transition: transform 1s; }
-      .App .containerCarousel .carousel_wrapper .ul_carousel li {
-        opacity: 0; }
-      .App .containerCarousel .carousel_wrapper .ul_carousel .active {
-        opacity: 1 !important; }
-      .App .containerCarousel .carousel_wrapper .ul_carousel .li_price {
-        width: 300px;
-        height: 300px;
-        background-color: blue; }
-      .App .containerCarousel .carousel_wrapper .ul_carousel .li_temp {
-        width: 300px;
-        height: 300px;
-        background-color: red; }
-      .App .containerCarousel .carousel_wrapper .ul_carousel .li_place {
-        width: 300px;
-        height: 300px;
-        background-color: yellow; }
-      .App .containerCarousel .carousel_wrapper .ul_carousel .li_type {
-        width: 300px;
-        height: 300px;
-        background-color: green; }
+      justify-content: center; }
+      .App .containerCarousel .container_item div {
+        padding: 5px 16px;
+        cursor: pointer; }
+    .App .containerCarousel .carousel_wrapper {
+      margin: 0 auto;
+      overflow: hidden;
+      width: 500px;
+      background-color: white; }
+      .App .containerCarousel .carousel_wrapper .ul_carousel {
+        padding: 0;
+        margin: 0;
+        width: 2000px;
+        display: flex;
+        list-style: none;
+        transition: transform 1s; }
+        .App .containerCarousel .carousel_wrapper .ul_carousel li {
+          opacity: 0;
+          width: 500px;
+          height: 300px; }
+        .App .containerCarousel .carousel_wrapper .ul_carousel .active {
+          opacity: 1 !important; }
+
+body {
+  transition: all 0.15s;
+  outline: none;
+  overflow: hidden; }
+
+.btn_find {
+  font-size: 19px;
+  font-family: "Pacifico";
+  overflow: visible;
+  border-radius: 3px;
+  position: relative;
+  padding-right: 30px;
+  background-color: #ecfbff;
+  border: 2px solid #a6e0ee;
+  color: #2d7586;
+  display: block;
+  margin: 13% auto;
+  height: 60px;
+  width: 200px;
+  cursor: pointer; }
+  .btn_find:focus {
+    outline: none;
+    border: none; }
+  .btn_find:hover {
+    background-color: #ddf7ff; }
+    .btn_find:hover svg {
+      transform: rotate(10deg);
+      transition: transform 0.15s; }
+  .btn_find svg {
+    position: absolute;
+    top: 13px;
+    right: 25px;
+    height: 30px;
+    width: auto;
+    transition: transform 0.15s; }
+    .btn_find svg path {
+      fill: #2d7586; }
+  .btn_find p {
+    margin: 0; }
+  .btn_find.clicked {
+    background-color: #cff5b3;
+    border: 2px solid #cff5b3;
+    color: #6aaa3b;
+    padding-right: 6px;
+    animation: bounce-in 0.3s;
+    cursor: default; }
+    .btn_find.clicked svg {
+      animation: flyaway 1.3s linear;
+      top: -80px;
+      right: -1000px; }
+      .btn_find.clicked svg path {
+        fill: #6aaa3b; }
+
+@keyframes flyaway {
+  0% {
+    transform: rotate(10deg);
+    top: 13px;
+    right: 25px;
+    height: 30px; }
+  5% {
+    transform: rotate(10deg);
+    top: 13px;
+    right: 0px;
+    height: 30px; }
+  20% {
+    transform: rotate(-20deg);
+    top: 13px;
+    right: -130px;
+    height: 45px; }
+  40% {
+    transform: rotate(10deg);
+    top: -40px;
+    right: -280px;
+    opacity: 1; }
+  100% {
+    transform: rotate(60deg);
+    top: -200px;
+    right: -1000px;
+    height: 0;
+    opacity: 0; } }
+
+@keyframes bounce-in {
+  0% {
+    padding-right: 30px; }
+  40% {
+    padding-right: 6px; }
+  50% {
+    padding-left: 30px; }
+  100% {
+    padding-left: 6px; } }
+
+@font-face {
+  font-family: "Calli";
+  src: url("../font/Moonbright Demo.ttf") format("truetype"); }

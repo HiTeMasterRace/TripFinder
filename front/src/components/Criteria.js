@@ -24,8 +24,6 @@ class Criteria extends Component {
         }
     }
 
-    //: culture, sport, montagne, mer, vie nocture
-
     render() {
         const { criteria } = this.state
 
