@@ -1,29 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class City extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-
-        };
-    }
-
-    getAllCity() {
-        //...
-    }
-
-
-    setNameCity() {
-
-    }
-
-    render() {
-        return (
-            <div className="City">
-                {this.props.cityname && <p>{this.props.cityname}</p>}
+const City = ({ city }) => {
+    return (
+        <div className="City">
+            <div>
+                <p>{city.budget}€</p>
             </div>
-        );
-    }
+            <p>{city.name} - {city.country_name}</p>
+            <p>{city.temperature}°C</p>
+            <p>{city.description}</p>
+        </div>
+    )
 }
 
 export default City;
