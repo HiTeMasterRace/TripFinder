@@ -8,39 +8,30 @@
 /* CSS APP */
 .App {
   width: 100%;
-  height: 100vh; }
-  .App .vertical-center {
-    margin: 0 auto;
-    width: fit-content; }
+  min-height: 100vh; }
+  .App .banner {
+    width: 100%;
+    height: 350px;
+    background: #ccc; }
+  .App h1 {
+    font-family: Pacifico;
+    font-size: 65px;
+    font-weight: 300;
+    text-align: center;
+    margin: 0;
+    padding-top: 55px; }
   .App .containerCarousel {
-    padding: 0 50px;
+    padding: 10px;
     box-shadow: -27.1px 62.5px 125px -25px rgba(50, 50, 93, 0.5), -16.2px 37.5px 75px -37.5px rgba(0, 0, 0, 0.6);
-    border-radius: 12px 12px 0 0;
-    background-color: #87bbfd;
-    overflow: hidden; }
-    .App .containerCarousel header {
-      background-color: #b1d2fe;
-      height: 40px;
-      width: calc( 100% + 100px);
-      margin-left: -50px;
-      display: flex;
-      justify-content: space-around; }
-      .App .containerCarousel header .search_bar {
-        background-color: #d8e8fe;
-        width: 250px;
-        height: 24px;
-        border-radius: 5px;
-        margin: 8px; }
-      .App .containerCarousel header .arrow {
-        display: flex;
-        justify-content: center; }
-        .App .containerCarousel header .arrow div {
-          color: black; }
-    .App .containerCarousel h1 {
-      font-family: Pacifico;
-      font-size: 50px;
-      font-weight: 300;
-      text-align: center; }
+    border-radius: 12px;
+    overflow: hidden;
+    width: 100%;
+    max-width: 950px;
+    margin: 0 auto;
+    height: 180px;
+    background-color: white;
+    position: relative;
+    top: 95px; }
     .App .containerCarousel .container_item {
       display: flex;
       justify-content: center; }
@@ -50,19 +41,20 @@
     .App .containerCarousel .carousel_wrapper {
       margin: 0 auto;
       overflow: hidden;
-      width: 500px;
+      width: 800px;
       background-color: white; }
       .App .containerCarousel .carousel_wrapper .ul_carousel {
         padding: 0;
         margin: 0;
-        width: 2000px;
+        width: 3200px;
         display: flex;
         list-style: none;
         transition: transform 1s; }
         .App .containerCarousel .carousel_wrapper .ul_carousel li {
           opacity: 0;
-          width: 500px;
-          height: 300px; }
+          width: 800px;
+          height: 300px;
+          padding: 10px 15px; }
         .App .containerCarousel .carousel_wrapper .ul_carousel .active {
           opacity: 1 !important; }
 
@@ -82,7 +74,7 @@ body {
   border: 2px solid #a6e0ee;
   color: #2d7586;
   display: block;
-  margin: 15px auto 0 auto;
+  margin: 30px auto 0 auto;
   height: 60px;
   width: 200px;
   cursor: pointer; }

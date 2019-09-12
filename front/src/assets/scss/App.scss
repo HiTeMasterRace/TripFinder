@@ -11,52 +11,36 @@
 
 .App {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
 
-  .vertical-center {
-    margin: 0 auto;
-    width: fit-content;
+  .banner{
+    width: 100%;
+    height: 350px;
+    background: #ccc;
+  }
+
+  h1 {
+    font-family: Pacifico;
+    font-size: 65px;
+    font-weight: 300;
+    text-align: center;
+    margin: 0;
+    padding-top: 55px;
   }
 
   .containerCarousel {
-    padding: 0 50px;
+    padding: 10px;
     box-shadow: -27.1px 62.5px 125px -25px rgba(50, 50, 93, 0.5), -16.2px 37.5px 75px -37.5px rgba(0, 0, 0, 0.6);
-    border-radius: 12px 12px 0 0;
-    background-color: #87bbfd;
+    border-radius: 12px ;
     overflow: hidden;
-
-    header{
-      background-color: #b1d2fe;
-      height: 40px;
-      width: calc( 100% + 100px );
-      margin-left:-50px; 
-      display: flex;
-      justify-content: space-around;
-
-      .search_bar{
-        background-color: #d8e8fe;
-        width: 250px;
-        height: 24px;
-        border-radius: 5px;
-        margin: 8px;
-      }
-
-      .arrow{
-        display: flex;
-        justify-content: center;
-        div{
-          color: black;
-        }
-      }
-      
-    }
-
-    h1 {
-      font-family: Pacifico;
-      font-size: 50px;
-      font-weight: 300;
-      text-align: center;
-    }
+    width: 100%;
+    max-width: 950px;
+    margin: 0 auto;
+    height: 180px;
+    background-color: white;
+    position: relative;
+    top: 95px;
+    
     .container_item {
       display: flex;
       justify-content: center;
@@ -70,20 +54,21 @@
     .carousel_wrapper {
       margin: 0 auto;
       overflow: hidden;
-      width: 500px;
+      width: 800px;
       background-color: white;
       .ul_carousel {
         padding: 0;
         margin: 0;
-        width: 2000px;
+        width: 3200px;
         display: flex;
         list-style: none;
         transition: transform 1s;
 
         li {
           opacity: 0;
-          width: 500px;
+          width: 800px;
           height: 300px;
+          padding: 10px 15px;
         }
 
         .active {
@@ -120,7 +105,7 @@ body {
   border: 2px solid #a6e0ee;
   color: #2d7586;
   display: block;
-  margin: 15px auto 0 auto;
+  margin: 30px auto 0 auto;
   height: 60px;
   width: 200px;
   cursor: pointer;

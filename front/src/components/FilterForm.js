@@ -2,11 +2,6 @@ import React, { Component } from 'react';
 
 import Slider from 'rc-slider';
 
-import budget from '../assets/images/budget.png'
-import temperature from '../assets/images/temperature.png'
-import place from '../assets/images/place.png'
-import type from '../assets/images/type.png'
-
 import 'rc-slider/assets/index.css';
 
 const Range = Slider.Range
@@ -53,56 +48,53 @@ class FilterForm extends Component {
         })
     }
 
-    //: culture, sport, montagne, mer, vie nocture
-
     render() {
         return (
-            <div>
-            <div className="containerCarousel">
-                <header>
-                    <div className="arrw"></div>
-                    <div className="search_bar"></div>
-                </header>
-                <h1>Trip Browser</h1>
-                <div className="container_item">
-                    <div onClick={() => this.switchForm("price")}>Budget</div>
-                    <div onClick={() => this.switchForm("place")}>Lieux</div>
-                    <div onClick={() => this.switchForm("temp")}>Température</div>
-                    <div onClick={() => this.switchForm("type")}>Type de voyage</div>
+        <div>
+            <div className="banner">
+                <h1>Trip Finder</h1>
+                <div className="containerCarousel">
+                    <div className="container_item">
+                        <div onClick={() => this.switchForm("price")}>Prix</div>
+                        <div onClick={() => this.switchForm("place")}>Lieux</div>
+                        <div onClick={() => this.switchForm("temp")}>Température</div>
+                        <div onClick={() => this.switchForm("type")}>Type de voyage</div>
+                    </div>
+                    <div className="carousel_wrapper">
+                        <ul className="ul_carousel">
+                            <li className="li_price active" data-position="0">
+                                <Range defaultValue={[10, 1000]} min={10} max={1000} onChange={this.handleBudget} />
+                                <p>{this.state.minBudget}€ -> {this.state.maxBudget}€</p>
+                            </li>
+                            <li className="li_place" data-position="1">
+                                <select name="continents" onChange={this.props.handle}>
+                                    <option value="">Sélectionner un continent</option>
+                                    {this.state.continents.map((continent, index) => (
+                                        <option key={index} value={continent}>
+                                            {continent}
+                                        </option>
+                                    ))}
+                                </select>
+                                <select name="country" onChange={this.props.handle}>
+                                    <option value="">Sélectionner un pays</option>
+                                    {this.state.countries.map((country, index) => (
+                                        <option key={index} value={country}>
+                                            {country}
+                                        </option>
+                                    ))}
+                                </select>
+                            </li>
+                            <li className="li_temp" data-position="2">
+                                <Range defaultValue={[-10, 35]} min={-10} max={35} onChange={this.handleTemp} />
+                                <p>{this.state.minTemp}°C -> {this.state.maxTemp}°C</p>
+                            </li>
+                            <li className="li_type" data-position="3"></li>
+                        </ul>
+                    </div>
                 </div>
-                <div className="carousel_wrapper">
-                    <ul className="ul_carousel">
-                        <li className="li_price active" data-position="0">
-                            <Range defaultValue={[10, 1000]} min={10} max={1000} onChange={this.handleBudget} />
-                            <p>{this.state.minBudget}€ -> {this.state.maxBudget}€</p>
-                        </li>
-                        <li className="li_place" data-position="1">
-                            <select name="continents" onChange={this.props.handle}>
-                                <option value="">Sélectionner un continent</option>
-                                {this.state.continents.map((continent, index) => (
-                                    <option key={index} value={continent}>
-                                        {continent}
-                                    </option>
-                                ))}
-                            </select>
-                            <select name="country" onChange={this.props.handle}>
-                                <option value="">Sélectionner un pays</option>
-                                {this.state.countries.map((country, index) => (
-                                    <option key={index} value={country}>
-                                        {country}
-                                    </option>
-                                ))}
-                            </select>
-                        </li>
-                        <li className="li_temp" data-position="2">
-                            <Range defaultValue={[-10, 35]} min={-10} max={35} onChange={this.handleTemp} />
-                            <p>{this.state.minTemp}°C -> {this.state.maxTemp}°C</p>
-                        </li>
-                        <li className="li_type" data-position="3">
-                            culture, sport, montagne, mer, vie nocture
-                        </li>
-                    </ul>
-                </div>
+            </div>
+            <div id="container_cities">
+
             </div>
             <button className="btn_find" onClick={this.send}>
                 <p>Rechercher</p>
