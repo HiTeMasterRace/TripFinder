@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
+import Slider from 'rc-slider';
+
+import 'rc-slider/assets/index.css';
+
+const Range = Slider.Range
 
 class Form extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            budget: { min: 10, max: 1000 },
             continents: [],
             countries: []
         };
@@ -13,22 +17,11 @@ class Form extends Component {
     render() {
         switch (this.props.criteria) {
             case "Budget":
-                return (
-                    <form>
-                        {/* <InputRange
-                            minValue={10}
-                            maxValue={1000}
-                            value={this.state.budget}
-                            formatLabel={budget => `${budget}€`}
-                            onChange={budget => this.setState({ budget })}
-                            onChangeComplete={budget => console.log(budget)}
-                        /> */}
-                    </form>
-                );
+                return <Range defaultValue={this.props.budget} value={this.props.budget} onChange={this.props.handleRange} />
             case "Lieu":
                 return (
-                    <form>
-                        <select name="continents" onChange={this.handleChange}>
+                    <div>
+                        <select name="continents" onChange={this.props.handle}>
                             <option value="">Sélectionner un continent</option>
                             {this.state.continents.map((continent, index) => (
                                 <option key={index} value={continent}>
@@ -36,7 +29,7 @@ class Form extends Component {
                                 </option>
                             ))}
                         </select>
-                        <select name="country" onChange={this.handleChange}>
+                        <select name="country" onChange={this.props.handle}>
                             <option value="">Sélectionner un pays</option>
                             {this.state.countries.map((country, index) => (
                                 <option key={index} value={country}>
@@ -44,15 +37,10 @@ class Form extends Component {
                                 </option>
                             ))}
                         </select>
-                    </form>
+                    </div>
                 );
             case "Température":
-                return (
-                    <form>
-                        <input type="range" name="tempMin" min="-10" />
-                        <input type="range" name="tempMax" max="35" />
-                    </form>
-                );
+                return <Range temp={this.props.temp} onChange={this.props.handleRange} />
             case "Type":
                 return (
                     <form>
