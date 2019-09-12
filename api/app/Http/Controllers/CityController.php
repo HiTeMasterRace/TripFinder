@@ -20,7 +20,7 @@ class CityController extends Controller
 
     public function index()
     {
-        return City::all()->toJson();
+        return CityResource::collection(City::all());
     }
 
 }
