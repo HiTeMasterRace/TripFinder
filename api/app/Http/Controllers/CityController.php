@@ -26,10 +26,9 @@ class CityController extends Controller
     public function search()
     {
         $res = request();
+        $request = City::all();
 
         if(count($_GET) != 0){
-            $request = City::all();
-
             if($res['minTmp'] && $res['maxTmp']){
                  $request = $request->whereBetween('temperature', [$res->minTmp,$res->maxTmp]);
             }
@@ -39,9 +38,9 @@ class CityController extends Controller
             if($res['minBudget'] && $res['maxBudget']){
                  $request = $request->whereBetween('budget', [$res->minBudget,$res->maxBudget]);
             }
+
             return  $request;
         }
-
-        return $res;
+        return $request;
     }
 }
