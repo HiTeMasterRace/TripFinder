@@ -19,10 +19,37 @@
   }
 
   .containerCarousel {
-    padding: 10px 50px 0 50px;
+    padding: 0 50px;
     box-shadow: -27.1px 62.5px 125px -25px rgba(50, 50, 93, 0.5), -16.2px 37.5px 75px -37.5px rgba(0, 0, 0, 0.6);
     border-radius: 12px 12px 0 0;
     background-color: #87bbfd;
+    overflow: hidden;
+
+    header{
+      background-color: #b1d2fe;
+      height: 40px;
+      width: calc( 100% + 100px );
+      margin-left:-50px; 
+      display: flex;
+      justify-content: space-around;
+
+      .search_bar{
+        background-color: #d8e8fe;
+        width: 250px;
+        height: 24px;
+        border-radius: 5px;
+        margin: 8px;
+      }
+
+      .arrow{
+        display: flex;
+        justify-content: center;
+        div{
+          color: black;
+        }
+      }
+      
+    }
 
     h1 {
       font-family: Pacifico;
@@ -93,7 +120,7 @@ body {
   border: 2px solid #a6e0ee;
   color: #2d7586;
   display: block;
-  margin: 13% auto;
+  margin: 15px auto 0 auto;
   height: 60px;
   width: 200px;
   cursor: pointer;

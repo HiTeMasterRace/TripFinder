@@ -52,7 +52,11 @@ class FilterForm extends Component {
         return (
             <div>
             <div className="containerCarousel">
-                <h1>Trip Finder</h1>
+                <header>
+                    <div className="arrw"></div>
+                    <div className="search_bar"></div>
+                </header>
+                <h1>Trip Browser</h1>
                 <div className="container_item">
                     <div onClick={() => this.switchForm("price")}>Prix</div>
                     <div onClick={() => this.switchForm("place")}>Lieux</div>
@@ -93,7 +97,7 @@ class FilterForm extends Component {
             </div>
             <button className="btn_find" onClick={this.send}>
                 <p>Rechercher</p>
-                <svg version="1.1" x="0px" y="0px" viewBox="0 0 512 512" enable-background="new 0 0 512 512"><path id="paper-plane-icon" d="M462,54.955L355.371,437.187l-135.92-128.842L353.388,167l-179.53,124.074L50,260.973L462,54.955z
+                <svg version="1.1" x="0px" y="0px" viewBox="0 0 512 512" enableBackground="new 0 0 512 512"><path id="paper-plane-icon" d="M462,54.955L355.371,437.187l-135.92-128.842L353.388,167l-179.53,124.074L50,260.973L462,54.955z
 M202.992,332.528v124.517l58.738-67.927L202.992,332.528z"></path> </svg>
             </button>
         </div>
