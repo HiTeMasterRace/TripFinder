@@ -162,50 +162,57 @@ class FilterForm extends Component {
         return (
             <div>
                 <div className="banner">
-                    <h1>Trip Finder</h1>
-                    <div className="containerCarousel">
-                        <div className="container_item">
-                            <div onClick={() => this.switchForm("price")}>Prix</div>
-                            <div onClick={() => this.switchForm("place")}>Lieux</div>
-                            <div onClick={() => this.switchForm("temp")}>Température</div>
-                            <div onClick={() => this.switchForm("type")}>Type de voyage</div>
-                        </div>
-                        <div className="carousel_wrapper">
-                            <ul className="ul_carousel">
-                                <li className="li_price active" data-position="0">
-                                    <Range defaultValue={[10, 1000]} min={10} max={1000} onChange={this.handleBudget} />
-                                    <p>{this.state.minBudget}€ -> {this.state.maxBudget}€</p>
-                                </li>
-                                <li className="li_place" data-position="1">
-                                    <select name="continent" onChange={this.handle}>
-                                        <option value="">Sélectionner un continent</option>
-                                        {this.state.continents.map(continent => (
-                                            <option key={continent.id} value={continent.name}>
-                                                {continent.name}
-                                            </option>
-                                        ))}
-                                    </select>
-                                    <select name="country" onChange={this.handle}>
-                                        <option value="">Sélectionner un pays</option>
-                                        {this.state.countries.map(country => (
-                                            <option key={country.id} value={country.name}>
-                                                {country.name}
-                                            </option>
-                                        ))}
-                                    </select>
-                                </li>
-                                <li className="li_temp" data-position="2">
-                                    <Range defaultValue={[-10, 35]} min={-10} max={35} onChange={this.handleTemp} />
-                                    <p>{this.state.minTemp}°C -> {this.state.maxTemp}°C</p>
-                                </li>
-                                <li className="li_type" data-position="3">
-                                    <img className="img_type" src={mountain} alt="Montagne" onClick={this.handleSelect} />
-                                    <img className="img_type" src={sea} alt="Mer" onClick={this.handleSelect} />
-                                    <img className="img_type" src={culture} alt="Culture" onClick={this.handleSelect} />
-                                    <img className="img_type" src={party} alt="Vie nocturne" onClick={this.handleSelect} />
-                                    <img className="img_type" src={sport} alt="Sport" onClick={this.handleSelect} />
-                                </li>
-                            </ul>
+                    <div className="container_video">
+                        <video width="" height="" autoPlay muted loop id="bgvid">
+                            <source src="https://allwebsite.ovh/video-back.mp4" type="video/webm" />
+                        </video>
+                    </div>
+                    <div className="pos">
+                        <h1>Trip Finder</h1>
+                        <div className="containerCarousel">
+                            <div className="container_item">
+                                <div onClick={() => this.switchForm("price")}>Prix</div>
+                                <div onClick={() => this.switchForm("place")}>Lieux</div>
+                                <div onClick={() => this.switchForm("temp")}>Température</div>
+                                <div onClick={() => this.switchForm("type")}>Type de voyage</div>
+                            </div>
+                            <div className="carousel_wrapper">
+                                <ul className="ul_carousel">
+                                    <li className="li_price active" data-position="0">
+                                        <Range defaultValue={[10, 1000]} min={10} max={1000} onChange={this.handleBudget} />
+                                        <p>{this.state.minBudget}€ -> {this.state.maxBudget}€</p>
+                                    </li>
+                                    <li className="li_place" data-position="1">
+                                        <select name="continent" onChange={this.handle}>
+                                            <option value="">Sélectionner un continent</option>
+                                            {this.state.continents.map(continent => (
+                                                <option key={continent.id} value={continent.name}>
+                                                    {continent.name}
+                                                </option>
+                                            ))}
+                                        </select>
+                                        <select name="country" onChange={this.handle}>
+                                            <option value="">Sélectionner un pays</option>
+                                            {this.state.countries.map(country => (
+                                                <option key={country.id} value={country.name}>
+                                                    {country.name}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </li>
+                                    <li className="li_temp" data-position="2">
+                                        <Range defaultValue={[-10, 35]} min={-10} max={35} onChange={this.handleTemp} />
+                                        <p>{this.state.minTemp}°C -> {this.state.maxTemp}°C</p>
+                                    </li>
+                                    <li className="li_type" data-position="3">
+                                        <img className="img_type" src={mountain} alt="Montagne" onClick={this.handleSelect} />
+                                        <img className="img_type" src={sea} alt="Mer" onClick={this.handleSelect} />
+                                        <img className="img_type" src={culture} alt="Culture" onClick={this.handleSelect} />
+                                        <img className="img_type" src={party} alt="Vie nocturne" onClick={this.handleSelect} />
+                                        <img className="img_type" src={sport} alt="Sport" onClick={this.handleSelect} />
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>

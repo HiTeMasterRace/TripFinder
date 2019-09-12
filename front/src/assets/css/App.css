@@ -13,16 +13,42 @@
     width: 100%;
     height: 350px;
     background: #ccc; }
+    .App .banner .container_video {
+      position: relative;
+      background-color: black;
+      height: 350px;
+      min-height: 25rem;
+      width: 100%;
+      overflow: hidden;
+      filter: blur(8px); }
+    .App .banner #bgvid {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      z-index: 0;
+      -ms-transform: translateX(-50%) translateY(-50%);
+      -moz-transform: translateX(-50%) translateY(-50%);
+      -webkit-transform: translateX(-50%) translateY(-50%);
+      transform: translateX(-50%) translateY(-50%); }
+    .App .banner .pos {
+      position: absolute;
+      top: 0;
+      width: 100%; }
   .App h1 {
     font-family: Pacifico;
-    font-size: 65px;
+    font-size: 75px;
     font-weight: 300;
     text-align: center;
     margin: 0;
+    color: white;
     padding-top: 55px; }
   .App .containerCarousel {
     padding: 10px;
-    box-shadow: -27.1px 62.5px 125px -25px rgba(50, 50, 93, 0.5), -16.2px 37.5px 75px -37.5px rgba(0, 0, 0, 0.6);
+    box-shadow: -27.1px 62.5px 125px -100px rgba(50, 50, 93, 0.5), -16.2px 37.5px 75px -37.5px rgba(0, 0, 0, 0.6);
     border-radius: 12px;
     overflow: hidden;
     width: 100%;
@@ -31,7 +57,7 @@
     height: 180px;
     background-color: white;
     position: relative;
-    top: 95px; }
+    top: 105px; }
     .App .containerCarousel .container_item {
       display: flex;
       justify-content: center; }
@@ -60,8 +86,7 @@
 
 body {
   transition: all 0.15s;
-  outline: none;
-  overflow: hidden; }
+  outline: none; }
 
 .btn_find {
   font-size: 19px;
@@ -74,7 +99,7 @@ body {
   border: 2px solid #a6e0ee;
   color: #2d7586;
   display: block;
-  margin: 30px auto 0 auto;
+  margin: 65px auto 0 auto;
   height: 60px;
   width: 200px;
   cursor: pointer; }
@@ -149,6 +174,27 @@ body {
   100% {
     padding-left: 6px; } }
 
+/* CSS CITIES */
+#container_cities {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 15px;
+  max-width: 1470px;
+  margin: 70px auto 0 auto; }
+  #container_cities .City {
+    width: 305px;
+    height: 388px;
+    border: 1px solid #e0dede;
+    margin: 15px;
+    overflow: hidden;
+    padding: 15px; }
+    #container_cities .City:hover {
+      cursor: pointer;
+      box-shadow: 0 0 12px #ccc; }
+
+/* FONT */
 @font-face {
   font-family: "Calli";
   src: url("../font/Moonbright Demo.ttf") format("truetype"); }
