@@ -13,19 +13,11 @@ class App extends Component {
     super(props);
     this.state = {
       criteria: "",
-      continent: "",
-      country: "",
       minBudget: 0,
       maxBudget: 0,
       minTemp: 0,
       maxTemp: 0,
     };
-  }
-
-  handle = (name, value) => {
-    this.setState({
-      [name]: value
-    })
   }
 
   render() {
@@ -34,7 +26,7 @@ class App extends Component {
         {/* <PaperPlane continent={this.state.continent} country={this.state.country} minBudget={this.state.minBudget} maxBudget={this.state.maxBudget} minTemp={this.state.minTemp} maxTemp={this.state.maxTemp} /> */}
 
         <div className="vertical-center">
-          <FilterForm criteria={this.state.criteria} budget={this.state.budget} temp={this.state.temp} handle={this.handle} handleBudget={this.handleBudget} handleTemp={this.handleTemp} />
+          <FilterForm criteria={this.state.criteria} budget={this.state.budget} temp={this.state.temp} handleBudget={this.handleBudget} handleTemp={this.handleTemp} />
         </div>
 
         {/* <Criteria handle={this.handle} />

@@ -20,7 +20,9 @@ class FilterForm extends Component {
     state = {
         cities: [],
         continents: [],
+        continent: "",
         countries: [],
+        country: "",
         minBudget: 10,
         maxBudget: 1000,
         minTemp: -10,
@@ -36,7 +38,7 @@ class FilterForm extends Component {
     getCities() {
         axios({
             method: "GET",
-            url: "https://bb63c5d0.ngrok.io/api/cities",
+            url: "https://allwebsite.ovh/api/cities",
             headers: {
                 "Access-Control-Allow-Origin": "*",
                 "Accept": "application/json"
@@ -56,7 +58,7 @@ class FilterForm extends Component {
     getCountries() {
         axios({
             method: "GET",
-            url: "http://allwebsite.ovh/api/countries",
+            url: "https://allwebsite.ovh/api/countries",
             headers: {
                 "Access-Control-Allow-Origin": "*",
                 "Accept": "application/json",
@@ -65,9 +67,9 @@ class FilterForm extends Component {
         })
             .then(res => {
                 if (res.status === 200) {
-                    const countries = res.data.sort()
+                    const countries = res.data
 
-                    // countries.sort()
+                    countries.sort()
 
                     this.setState({ countries })
                 }
@@ -77,15 +79,18 @@ class FilterForm extends Component {
     getContinents() {
         axios({
             method: "GET",
-            url: "https://bb63c5d0.ngrok.io/api/continents",
+            url: "https://allwebsite.ovh/api/continents",
             headers: {
                 "Access-Control-Allow-Origin": "*",
-                "Accept": "application/json"
+                "Accept": "application/json",
+                "Content-Type": "application/json"
             }
         })
             .then(res => {
                 if (res.status === 200) {
-                    const continents = res.data
+                    let continents = res.data
+
+                    continents.sort()
 
                     this.setState({ continents })
                 }
@@ -103,10 +108,40 @@ class FilterForm extends Component {
         elemUL.style.transform = "translateX(-" + pos * elemLI.offsetWidth + "px)";
     }
 
-    send() {
+    handle = (e) => {
+        const name = e.target.name
+        const value = e.target.value
+
+        this.setState({
+            [name]: value
+        })
+    }
+
+    send = () => {
         document.querySelector('.btn_find').classList.add('clicked');
 
+        const { minBudget, maxBudget, minTemp, maxTemp, country, continent } = this.state
 
+        let URL_API = `https://allwebsite.ovh/api/search?minTmp=${minTemp}&maxTmp=${maxTemp}&minBudget=${minBudget}&maxBudget=${maxBudget}`
+
+        if (country) URL_API += `&country=${country}`
+
+        if (continent) URL_API += `&continent=${continent}`
+
+        axios({
+            method: "GET",
+            url: URL_API,
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            }
+        })
+            .then(res => {
+                if (res.status === 200) {
+                    console.log(res.data)
+                }
+            })
     }
 
     handleBudget = (value) => {
@@ -142,7 +177,7 @@ class FilterForm extends Component {
                                     <p>{this.state.minBudget}€ -> {this.state.maxBudget}€</p>
                                 </li>
                                 <li className="li_place" data-position="1">
-                                    <select name="continents" onChange={this.props.handle}>
+                                    <select name="continent" onChange={this.handle}>
                                         <option value="">Sélectionner un continent</option>
                                         {this.state.continents.map(continent => (
                                             <option key={continent.id} value={continent.name}>
@@ -150,7 +185,7 @@ class FilterForm extends Component {
                                             </option>
                                         ))}
                                     </select>
-                                    <select name="country" onChange={this.props.handle}>
+                                    <select name="country" onChange={this.handle}>
                                         <option value="">Sélectionner un pays</option>
                                         {this.state.countries.map(country => (
                                             <option key={country.id} value={country.name}>
