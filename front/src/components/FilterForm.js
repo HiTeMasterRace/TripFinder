@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 
 import Slider from 'rc-slider';
 
+import budget from '../assets/images/budget.png'
+import temperature from '../assets/images/temperature.png'
+import place from '../assets/images/place.png'
+import type from '../assets/images/type.png'
+
 import 'rc-slider/assets/index.css';
 
 const Range = Slider.Range
@@ -48,6 +53,8 @@ class FilterForm extends Component {
         })
     }
 
+    //: culture, sport, montagne, mer, vie nocture
+
     render() {
         return (
             <div>
@@ -58,7 +65,7 @@ class FilterForm extends Component {
                 </header>
                 <h1>Trip Browser</h1>
                 <div className="container_item">
-                    <div onClick={() => this.switchForm("price")}>Prix</div>
+                    <div onClick={() => this.switchForm("price")}>Budget</div>
                     <div onClick={() => this.switchForm("place")}>Lieux</div>
                     <div onClick={() => this.switchForm("temp")}>Température</div>
                     <div onClick={() => this.switchForm("type")}>Type de voyage</div>
@@ -91,7 +98,9 @@ class FilterForm extends Component {
                             <Range defaultValue={[-10, 35]} min={-10} max={35} onChange={this.handleTemp} />
                             <p>{this.state.minTemp}°C -> {this.state.maxTemp}°C</p>
                         </li>
-                        <li className="li_type" data-position="3"></li>
+                        <li className="li_type" data-position="3">
+                            culture, sport, montagne, mer, vie nocture
+                        </li>
                     </ul>
                 </div>
             </div>
