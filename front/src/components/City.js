@@ -2,7 +2,7 @@ import React from 'react';
 
 const City = ({ city }) => {
     return (
-        <div className="City">
+        <div className="City" style={{ backgroundImage: `url(https://allwebsite.ovh/${city.filename})`, width: "100%", height: "auto" }}>
             <div>
                 <p>{city.budget}€</p>
             </div>

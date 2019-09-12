@@ -23,6 +23,7 @@ class FilterForm extends Component {
         continent: "",
         countries: [],
         country: "",
+        type: "",
         minBudget: 10,
         maxBudget: 1000,
         minTemp: -10,
@@ -69,7 +70,7 @@ class FilterForm extends Component {
                 if (res.status === 200) {
                     const countries = res.data
 
-                    countries.sort()
+                    this.sortElements(countries)
 
                     this.setState({ countries })
                 }
@@ -90,15 +91,24 @@ class FilterForm extends Component {
                 if (res.status === 200) {
                     let continents = res.data
 
-                    continents.sort()
+                    this.sortElements(continents)
 
                     this.setState({ continents })
                 }
             })
     }
 
+    sortElements = (array) => {
+        array.sort((a, b) => {
+            if (a.name < b.name) { return -1; }
+            if (a.name > b.name) { return 1; }
+            return 0;
+        })
+
+        return array
+    }
+
     switchForm = (critere) => {
-        console.log(critere);
         const elemUL = document.querySelector('.ul_carousel');
         const elemLI = document.querySelector('.li_' + critere);
         const pos = parseInt(elemLI.getAttribute('data-position'));
@@ -106,15 +116,6 @@ class FilterForm extends Component {
 
         elemLI.classList.add('active');
         elemUL.style.transform = "translateX(-" + pos * elemLI.offsetWidth + "px)";
-    }
-
-    handle = (e) => {
-        const name = e.target.name
-        const value = e.target.value
-
-        this.setState({
-            [name]: value
-        })
     }
 
     send = () => {
@@ -142,6 +143,21 @@ class FilterForm extends Component {
                     console.log(res.data)
                 }
             })
+    }
+
+    handle = (e) => {
+        const name = e.target.name
+        const value = e.target.value
+
+        this.setState({
+            [name]: value
+        })
+    }
+
+    handleType = (e) => {
+        const value = e.target.name
+
+        console.log(value)
     }
 
     handleBudget = (value) => {
@@ -205,11 +221,11 @@ class FilterForm extends Component {
                                         <p>{this.state.minTemp}°C -> {this.state.maxTemp}°C</p>
                                     </li>
                                     <li className="li_type" data-position="3">
-                                        <img className="img_type" src={mountain} alt="Montagne" onClick={this.handleSelect} />
-                                        <img className="img_type" src={sea} alt="Mer" onClick={this.handleSelect} />
-                                        <img className="img_type" src={culture} alt="Culture" onClick={this.handleSelect} />
-                                        <img className="img_type" src={party} alt="Vie nocturne" onClick={this.handleSelect} />
-                                        <img className="img_type" src={sport} alt="Sport" onClick={this.handleSelect} />
+                                        <img className="img_type" src={mountain} name="Montagne" alt="Montagne" onClick={this.handleType} />
+                                        <img className="img_type" src={sea} name="Mer" alt="Mer" onClick={this.handleType} />
+                                        <img className="img_type" src={culture} name="Culture" alt="Culture" onClick={this.handleType} />
+                                        <img className="img_type" src={party} name="Vie nocturne" alt="Vie nocturne" onClick={this.handleType} />
+                                        <img className="img_type" src={sport} name="Sport" alt="Sport" onClick={this.handleType} />
                                     </li>
                                 </ul>
                             </div>
