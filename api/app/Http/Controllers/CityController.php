@@ -11,6 +11,8 @@ namespace App\Http\Controllers;
 use App\Http\Resources\CityCollection;
 use App\Http\Resources\CityResource;
 use App\City;
+use App\Country;
+use App\Type;
 
 class CityController extends Controller
 {
@@ -21,6 +23,65 @@ class CityController extends Controller
     public function index()
     {
         return CityResource::collection(City::all());
+    }
+
+    public function store()
+    {
+        $data = request()->validate([
+            'country_id' => 'required|integer',
+            'name' => 'required',
+            'budget' => 'required',
+            'temperature' => 'required',
+            'description' => 'string',
+            'location' => 'string',
+            'filename' => 'string'
+        ]);
+
+        Country::findOrFail(request()->country_id);
+
+        $city = City::create($data);
+
+        if (request()->types) {
+            foreach(request()->types as $type) {
+                Type::findOrFail($type);
+            }
+
+            $city->types()->sync(request()->types);
+        }
+
+        return new CityResource($city);
+    }
+
+    public function update(City $city)
+    {
+        $data = request()->validate([
+            'country_id' => 'required|integer',
+            'name' => 'required',
+            'budget' => 'required',
+            'temperature' => 'required',
+            'description' => 'string',
+            'location' => 'string',
+            'filename' => 'string'
+        ]);
+
+        Country::findOrFail(request()->country_id);
+
+        $city->update($data);
+
+        if (request()->types) {
+            foreach(request()->types as $type) {
+                Type::findOrFail($type);
+            }
+
+            $city->types()->sync(request()->types);
+        }
+
+        return new CityResource($city);
+    }
+
+    public function destroy(City $city)
+    {
+        $city->delete();
     }
 
     public function search()

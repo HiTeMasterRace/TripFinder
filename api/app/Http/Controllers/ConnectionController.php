@@ -19,6 +19,11 @@ class ConnectionController extends Controller
         }
     }
 
+    public function me()
+    {
+        return Auth::user();
+    }
+
     public function logout()
     {
         Auth::user()->token()->revoke();

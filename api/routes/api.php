@@ -15,12 +15,12 @@ use Illuminate\Http\Request;
 
 Route::post('login','ConnectionController@login');
 Route::post('users', 'UserController@store');
+Route::get('cities', 'CityController@index');
 
 Route::group(['middleware' => ['auth:api']], function() {
     Route::post('logout','ConnectionController@logout');
 
     Route::get('cities/{city}', 'CityController@show');
-    Route::get('cities', 'CityController@index');
 
     Route::get('continents', 'ContinentController@index');
 
@@ -32,4 +32,12 @@ Route::group(['middleware' => ['auth:api']], function() {
     Route::get('users/{id}', 'UserController@show');
     Route::put('users/{id}', 'UserController@update');
     Route::delete('users/{id}', 'UserController@destroy');
+
+    Route::get('me', 'ConnectionController@me');
+});
+
+Route::group(['middleware' => ['auth:api', 'admin']], function() {
+    Route::post('cities', 'CityController@store');
+    Route::patch('cities/{city}', 'CityController@update');
+    Route::delete('cities/{city}', 'CityController@destroy');
 });
