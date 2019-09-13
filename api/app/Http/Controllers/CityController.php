@@ -15,7 +15,7 @@ use App\City;
 class CityController extends Controller
 {
     public function show(City $city){
-        return new  CityResource($city);
+        return new CityResource($city);;
     }
 
     public function index()
@@ -26,21 +26,27 @@ class CityController extends Controller
     public function search()
     {
         $res = request();
-        $request = City::all();
+        $cities = City::all();
 
-        if(count($_GET) != 0){
-            if($res['minTmp'] && $res['maxTmp']){
-                $request = $request->whereBetween('temperature', [$res->minTmp,$res->maxTmp]);
-            }
-            if($res['name']){
-                $request = $request->where('name', '=', $res->name);
-            }
-            if($res['minBudget'] && $res['maxBudget']){
-                $request = $request->whereBetween('budget', [$res->minBudget,$res->maxBudget]);
+        if (count($_GET) != 0) {
+            if ($res->minTmp && $res->maxTmp) {
+                $cities = $cities->whereBetween('temperature', [$res->minTmp, $res->maxTmp]);
             }
 
-            return  $request->flatten();
+            if ($res->name) {
+                $cities = $cities->where('name', '=', $res->name);
+            }
+
+            if ($res->minBudget && $res->maxBudget) {
+                $cities = $cities->whereBetween('budget', [$res->minBudget, $res->maxBudget]);
+            }
+
+            if ($res->continent) {
+                $cities = $cities->where('continent', '=', $res->continent);
+            }
+
+            return  CityResource::collection($cities->flatten());
         }
-        return $request;
+        return CityResource::collection($cities);
     }
 }
