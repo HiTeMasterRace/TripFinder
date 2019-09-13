@@ -11,6 +11,10 @@ import sea from '../assets/images/sea.png'
 import culture from '../assets/images/culture.png'
 import party from '../assets/images/party.png'
 import sport from '../assets/images/sport.png'
+import iconhot from '../assets/images/iconhot.png'
+import iconcold from '../assets/images/iconcold.png'
+import bourse from '../assets/images/iconbourse.png'
+import temp from '../assets/images/icontemp.png'
 
 const Range = Slider.Range
 
@@ -88,9 +92,8 @@ class FilterForm extends Component {
         const elemUL = document.querySelector('.ul_carousel');
         const elemLI = document.querySelector('.li_' + critere);
         const pos = parseInt(elemLI.getAttribute('data-position'));
-        document.querySelector('.active').classList.remove('active');
-
-        elemLI.classList.add('active');
+        document.querySelector('.item_focus').classList.remove('item_focus')
+        document.querySelector('.item_' + critere).classList.add('item_focus')
         elemUL.style.transform = "translateX(-" + pos * elemLI.offsetWidth + "px)";
     }
 
@@ -134,6 +137,11 @@ class FilterForm extends Component {
 
     handleType = (e) => {
         const value = e.target.name
+        var img ="";
+        if ( img = document.querySelector('.img_focus'))
+            img.classList.remove('img_focus')
+
+        e.target.classList.add('img_focus')
 
         this.setState({
             type: value
@@ -159,18 +167,22 @@ class FilterForm extends Component {
             <div>
                 <div className="containerCarousel">
                     <div className="container_item">
-                        <div onClick={() => this.switchForm("price")}>Prix</div>
-                        <div onClick={() => this.switchForm("place")}>Lieux</div>
-                        <div onClick={() => this.switchForm("temp")}>Température</div>
-                        <div onClick={() => this.switchForm("type")}>Type de voyage</div>
+                        <div onClick={() => this.switchForm("price")} className="item_price item_focus">Prix</div>
+                        <div onClick={() => this.switchForm("place")} className="item_place">Lieux</div>
+                        <div onClick={() => this.switchForm("temp")} className="item_temp">Température</div>
+                        <div onClick={() => this.switchForm("type")} className="item_type">Type de voyage</div>
                     </div>
                     <div className="carousel_wrapper">
                         <ul className="ul_carousel">
                             <li className="li_price active" data-position="0">
-                                <Range defaultValue={[10, 1000]} min={10} max={1000} onChange={this.handleBudget} />
-                                <p>{this.state.minBudget}€ -> {this.state.maxBudget}€</p>
+                                <div className="slider_budget">
+                                    <Range defaultValue={[10, 1000]} min={10} max={1000} onChange={this.handleBudget} />
+                                </div>
+                                <p><img src={bourse} width="35" height="auto"/> {this.state.minBudget}€ et {this.state.maxBudget}€</p>
+
                             </li>
                             <li className="li_place" data-position="1">
+                                <p>Vers ou souhaitez-vous aller ?</p>
                                 <select name="continent" onChange={this.handle}>
                                     <option value="">Sélectionner un continent</option>
                                     {this.state.continents.map(continent => (
@@ -189,15 +201,23 @@ class FilterForm extends Component {
                                 </select>
                             </li>
                             <li className="li_temp" data-position="2">
-                                <Range defaultValue={[-10, 35]} min={-10} max={35} onChange={this.handleTemp} />
-                                <p>{this.state.minTemp}°C -> {this.state.maxTemp}°C</p>
+                                <p>Quelle serait la température idéale ?</p>
+                                <div className="slider_temp">
+                                    <img src={iconcold} alt="Fraicheur"/>
+                                    <Range defaultValue={[-10, 35]} min={-10} max={35} onChange={this.handleTemp} />
+                                    <img src={iconhot} alt="Chaleur"/>
+                                </div>
+                                <p><img src={temp} width="35" height="auto"/>{this.state.minTemp}°C et {this.state.maxTemp}°C</p>
                             </li>
                             <li className="li_type" data-position="3">
-                                <img className="img_type" src={mountain} name="montagne" alt="Montagne" onClick={this.handleType} />
-                                <img className="img_type" src={sea} name="plage" alt="plage" onClick={this.handleType} />
-                                <img className="img_type" src={culture} name="culture" alt="Culture" onClick={this.handleType} />
-                                <img className="img_type" src={party} name="vie nocturne" alt="Vie nocturne" onClick={this.handleType} />
-                                <img className="img_type" src={sport} name="sport" alt="Sport" onClick={this.handleType} />
+                                <p>Quel type de voyage recherhcez-vous ?</p>
+                                <div className="container">
+                                    <img className="img_type" src={mountain} name="montagne" alt="Montagne" onClick={this.handleType}/>
+                                    <img className="img_type" src={sea} name="plage" alt="plage" onClick={this.handleType} />
+                                    <img className="img_type" src={culture} name="culture" alt="Culture" onClick={this.handleType} />
+                                    <img className="img_type" src={party} name="vie nocturne" alt="Vie nocturne" onClick={this.handleType} />
+                                    <img className="img_type" src={sport} name="sport" alt="Sport" onClick={this.handleType} />
+                                </div>
                             </li>
                         </ul>
                     </div>
