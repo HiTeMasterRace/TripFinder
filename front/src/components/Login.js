@@ -50,7 +50,7 @@ class Login extends Component {
 
     render() {
         return (
-            <div>
+            <div className="vertical-center">
                 <form onSubmit={this.handleSubmit}>
                     <input type="text" required name="email" placeholder="Votre email" value={this.state.email} onChange={this.handleChange} />
                     <br />
@@ -58,7 +58,7 @@ class Login extends Component {
                     <br />
                     <input type="submit" value="Connexion" />
                 </form>
-                <p onClick={() => this.props.onTypeChange("signup")} style={{ cursor: "pointer", userSelect: "none" }}>Pas encore inscrit ? S'inscrire</p>
+                <p className="link" onClick={() => this.props.onTypeChange("signup")} style={{ cursor: "pointer", userSelect: "none" }}>Pas encore inscrit ? <u>S'inscrire</u></p>
             </div>
         );
     }

@@ -46,7 +46,7 @@ class Signup extends Component {
 
     render() {
         return (
-            <div>
+            <div className="vertical-center">
                 <form onSubmit={this.handleSubmit}>
                     <input type="mail" required name="email" placeholder="Votre email" value={this.state.email} onChange={this.handleChange} />
                     <br />
@@ -56,7 +56,7 @@ class Signup extends Component {
                     <br />
                     <input type="submit" value="Inscription" />
                 </form>
-                <p onClick={() => this.props.onTypeChange("login")} style={{ cursor: "pointer", userSelect: "none" }}>Déjà un compte ? Se connecter</p>
+                <p className="link" onClick={() => this.props.onTypeChange("login")} style={{ cursor: "pointer", userSelect: "none" }}>Déjà un compte ? <u>Se connecter</u></p>
             </div>
         );
     }

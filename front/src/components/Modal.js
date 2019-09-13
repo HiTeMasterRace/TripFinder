@@ -24,6 +24,12 @@ class Modal extends Component {
         this.setState({ type })
     }
 
+    openModalFunc = () => {
+        this.setState({openModal: !this.state.openModal})
+        document.querySelector('.active_back') ? document.querySelector('.active_back').classList.remove('active_back') : document.querySelector('.back-modal').classList.add('active_back')
+        
+    }
+
     handleLogout = () => {
         if (window.confirm("Êtes-vous sûr de vous déconnecter ?")) {
             axios({
@@ -50,19 +56,20 @@ class Modal extends Component {
 
         if (!token) return (
             <div>
-                <p onClick={() => this.setState({ openModal: !this.state.openModal })} style={{ cursor: "pointer", userSelect: "none", color: "white" }}>
+                <p className="log" onClick={() => this.openModalFunc()}>
                     Connexion/Inscription
                 </p>
 
                 {this.state.openModal &&
-                    <div style={{ backgroundColor: "white", width: "200px", padding: "15px", position: "absolute" }}>
+                    <div id="modal">
+                        <div className="btn_close" onClick={() => this.openModalFunc()}>&times;</div>
                         {this.renderType()}
                     </div>
                 }
             </div>
         )
         else return (
-            <p onClick={this.handleLogout} style={{ cursor: "pointer", userSelect: "none", color: "white" }}>Bienvenue, {name}</p>
+            <p className="log" onClick={this.handleLogout}>Bienvenue, {name} (déconnectez-vous)</p>
         )
     }
 }

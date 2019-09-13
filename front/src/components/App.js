@@ -132,6 +132,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <div className="back-modal"></div>
         <div className="vertical-center">
           <div className="banner">
             <Video />
