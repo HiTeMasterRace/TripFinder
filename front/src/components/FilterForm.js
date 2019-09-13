@@ -43,9 +43,6 @@ class FilterForm extends Component {
     }
 
     send = () => {
-        document.querySelector('.btn_find').classList.add('clicked');
-        setTimeout(() => this.reverse(), 5000);
-
         const { minBudget, maxBudget, minTemp, maxTemp, country, continent, type } = this.state
 
         const token = localStorage.getItem("token")
@@ -71,11 +68,14 @@ class FilterForm extends Component {
             .then(res => {
                 if (res.status === 200) {
                     const cities = res.data
-
+                    document.querySelector('.btn_find').classList.add('clicked');
+                    setTimeout(() => this.reverse(), 5000);
                     this.props.handleSearch(cities)
                 }
             })
             .catch(err => { alert("Vous devez être connecté pour pouvoir faire une recherche") })
+
+        
     }
 
     handle = (e) => {

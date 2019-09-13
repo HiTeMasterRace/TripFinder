@@ -14,6 +14,12 @@ class ModalAdmin extends Component {
         filename: ""
     };
 
+    openModalFunc = () => {
+        this.setState({ openModal: !this.state.openModal })
+        document.querySelector('.active_back') ? document.querySelector('.active_back').classList.remove('active_back') : document.querySelector('.back-modal').classList.add('active_back')
+
+    }
+
     handleChange = (e) => {
         const name = e.target.name
         const value = e.target.value
@@ -64,12 +70,13 @@ class ModalAdmin extends Component {
     render() {
         return (
             <div>
-                <p onClick={() => this.setState({ openModal: !this.state.openModal })} >
+                <p className="log"  onClick={() => this.openModalFunc()} >
                     Ajout d'une ville
                 </p>
 
                 {this.state.openModal &&
-                    <div style={{ backgroundColor: "white", width: "200px", padding: "15px", position: "absolute" }}>
+                    <div id="modal">
+                        <div className="btn_close" onClick={() => this.openModalFunc()}>&times;</div>
                         <form onSubmit={this.handleSubmit}>
                             <select name="country_id" onChange={this.handleChange}>
                                 <option value="">Sélectionner un pays</option>

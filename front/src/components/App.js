@@ -154,13 +154,14 @@ class App extends Component {
           <div className="banner">
             <Video />
             <div className="pos">
-              <Modal name={this.state.name} />
+              <div className="flex flex-space-between">
+                <Modal name={this.state.name} />{this.state.is_admin === 1 && <ModalAdmin is_admin={this.state.is_admin} handleDelete={this.handleDelete} countries={this.state.countries} />}
+              </div>
               <h1>Trip Finder</h1>
               <FilterForm handleSearch={this.handleSearch} countries={this.state.countries} continents={this.state.continents} />
               <div id="container_cities">
                 {this.state.cities.map(city => <City key={city.id} city={city} is_admin={this.state.is_admin} />)}
               </div>
-              {this.state.is_admin === 1 && <ModalAdmin is_admin={this.state.is_admin} handleDelete={this.handleDelete} countries={this.state.countries} />}
             </div>
           </div>
         </div>
