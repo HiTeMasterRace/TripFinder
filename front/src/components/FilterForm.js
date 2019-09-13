@@ -107,8 +107,6 @@ class FilterForm extends Component {
 
         if (type) URL_API += `&type=${type}`
 
-        console.log(URL_API)
-
         axios({
             method: "GET",
             url: URL_API,

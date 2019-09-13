@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 
 import axios from 'axios';
 
-import Header from './Header';
+import Video from './Video';
+import Modal from './Modal';
 import FilterForm from './FilterForm';
 import City from './City';
 
@@ -40,8 +41,9 @@ class App extends Component {
       <div className="App">
         <div className="vertical-center">
           <div className="banner">
-            <Header />
+            <Video />
             <div className="pos">
+              <Modal />
               <h1>Trip Finder</h1>
               <FilterForm />
               <div id="container_cities">

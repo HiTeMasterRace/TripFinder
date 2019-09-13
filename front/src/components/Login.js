@@ -27,9 +27,10 @@ class Login extends Component {
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
-                <input type="text" name="email" value={this.state.email} onChange={this.handleChange} />
+                <input type="text" name="email" placeholder="example@example.com" value={this.state.email} onChange={this.handleChange} />
+                <br/>
                 <input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
-
+                <br/>
                 <input type="submit" value="Se connecter" />
             </form>
         );

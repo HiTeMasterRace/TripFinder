@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Header = () => {
+const Video = () => {
     return (
         <div className="container_video">
             <video width="" height="" autoPlay muted loop id="bgvid">
@@ -10,4 +10,4 @@ const Header = () => {
     )
 }
 
-export default Header
+export default Video
