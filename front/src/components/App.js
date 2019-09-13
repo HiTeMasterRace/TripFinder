@@ -15,10 +15,12 @@ const token = localStorage.getItem("token")
 class App extends Component {
   state = {
     cities: [],
+    city: {},
     continents: [],
     countries: [],
     is_admin: 0,
-    name: ""
+    name: "",
+    openModal: ""
   };
 
   componentDidMount() {
@@ -128,22 +130,44 @@ class App extends Component {
     this.setState({ cities })
   }
 
-  handleModal = (action) => {
+  openModalFunc = (action) => {
+    if (!action) {
+      this.setState({
+        city: {}
+      })
+    }
 
+    document.querySelector('.active_back')
+        ? document.querySelector('.active_back').classList.remove('active_back')
+        : document.querySelector('.back-modal').classList.add('active_back')
+
+    this.setState({ openModal: action })
+  }
+
+  handleEdit = (city_id) => {
+    const city = this.state.cities.find(city => city.id === city_id)
+
+    this.setState({ city })
+
+    this.openModalFunc("edit")
   }
 
   handleDelete = (city_id) => {
-    axios({
-      method: "DELETE",
-      url: `https://allwebsite.ovh/api/cities/${city_id}`,
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Accept": "application/json",
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`
-      }
-    })
-      .then(res => console.log(res))
+    if (window.confirm("Êtes-vous sûr de vouloir supprimer cette ville ?")) {
+      axios({
+        method: "DELETE",
+        url: `https://allwebsite.ovh/api/cities/${city_id}`,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        }
+      })
+        .then(res => {
+          alert("La ville a été supprimée")
+        })
+    }
   }
 
   render() {
@@ -155,12 +179,13 @@ class App extends Component {
             <Video />
             <div className="pos">
               <div className="flex flex-space-between">
-                <Modal name={this.state.name} />{this.state.is_admin === 1 && <ModalAdmin is_admin={this.state.is_admin} handleDelete={this.handleDelete} countries={this.state.countries} />}
+                <Modal name={this.state.name} />
+                {this.state.is_admin === 1 && <ModalAdmin is_admin={this.state.is_admin} openModal={this.state.openModal} openModalFunc={this.openModalFunc} countries={this.state.countries} city={this.state.city} />}
               </div>
               <h1>Trip Finder</h1>
               <FilterForm handleSearch={this.handleSearch} countries={this.state.countries} continents={this.state.continents} />
               <div id="container_cities">
-                {this.state.cities.map(city => <City key={city.id} city={city} is_admin={this.state.is_admin} />)}
+                {this.state.cities.map(city => <City key={city.id} city={city} is_admin={this.state.is_admin} handleEdit={this.handleEdit} handleDelete={this.handleDelete} />)}
               </div>
             </div>
           </div>

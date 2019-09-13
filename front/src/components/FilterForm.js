@@ -73,9 +73,9 @@ class FilterForm extends Component {
                     this.props.handleSearch(cities)
                 }
             })
-            .catch(err => { alert("Vous devez être connecté pour pouvoir faire une recherche") })
-
-        
+            .catch(err => {
+                alert("Vous devez être connecté pour pouvoir faire une recherche")
+            })
     }
 
     handle = (e) => {

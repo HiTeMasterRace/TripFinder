@@ -1,6 +1,6 @@
 import React from 'react';
 
-const City = ({ city, is_admin }) => {
+const City = ({ city, is_admin, handleEdit, handleDelete }) => {
     return (
         <div className="City">
             <div className="img_city">
@@ -11,7 +11,8 @@ const City = ({ city, is_admin }) => {
                     {is_admin === 1 &&
                         <div>
                             {/* <img src={} alt="Modifier la ville"/> */}
-                            {/* <p onClick={this.props.handleDelete(city.id)}>Supprimer</p> */}
+                            <p onClick={() => handleEdit(city.id)}>Modifier</p>
+                            <p onClick={() => handleDelete(city.id)}>Supprimer</p>
                         </div>
                     }
                     <div className="flex flex-space-between">

@@ -4,8 +4,9 @@ import axios from 'axios';
 
 class ModalAdmin extends Component {
     state = {
-        openModal: false,
+        openModal: "",
         country_id: 0,
+        city_id: 0,
         name: "",
         budget: 0,
         temp: 0,
@@ -14,10 +15,36 @@ class ModalAdmin extends Component {
         filename: ""
     };
 
-    openModalFunc = () => {
-        this.setState({ openModal: !this.state.openModal })
-        document.querySelector('.active_back') ? document.querySelector('.active_back').classList.remove('active_back') : document.querySelector('.back-modal').classList.add('active_back')
+    componentDidUpdate(prevProps, prevState) {
+        if (Object.keys(this.props.city).length > 0 && this.props.city.name !== prevState.name) this.editPlaceholder(this.props.city)
+    }
 
+    editPlaceholder = (city) => {
+        const country_id = this.props.countries.find(country => country.name === city.country_name).id
+
+        this.setState({
+            country_id,
+            city_id: city.id,
+            name: city.name,
+            budget: city.budget,
+            temp: city.temperature,
+            description: city.description,
+            location: city.location
+        })
+    }
+
+    openModalFunc = () => {
+        this.setState({
+            country: "",
+            name: "",
+            budget: 0,
+            temp: 0,
+            description: "",
+            location: "",
+            filename: ""
+        })
+
+        this.props.openModalFunc("")
     }
 
     handleChange = (e) => {
@@ -32,8 +59,6 @@ class ModalAdmin extends Component {
     };
 
     handleSubmit = (e) => {
-        e.preventDefault()
-
         const token = localStorage.getItem("token")
 
         let data = {
@@ -49,36 +74,60 @@ class ModalAdmin extends Component {
 
         if (this.state.filename) data = { ...data, description: this.state.filename }
 
-        axios({
-            method: "POST",
-            url: "https://allwebsite.ovh/api/cities",
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-                "Accept": "application/json",
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
-            },
-            data
-        })
-            .then(res => {
-                if (res.status === 200) {
-                    console.log(res.data)
-                }
+        if (this.props.openModal === "create") {
+            axios({
+                method: "POST",
+                url: "https://allwebsite.ovh/api/cities",
+                headers: {
+                    "Access-Control-Allow-Origin": "*",
+                    "Accept": "application/json",
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                data
             })
+                .then(res => {
+                    if (res.status === 200) {
+                        console.log(res.data)
+                    }
+                })
+        } else if (this.props.openModal === "edit") {
+            axios({
+                method: "PATCH",
+                url: `https://allwebsite.ovh/api/cities/${this.state.city_id}`,
+                headers: {
+                    "Access-Control-Allow-Origin": "*",
+                    "Accept": "application/json",
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                data
+            })
+                .then(res => {
+                    if (res.status === 200) {
+                        console.log(res.data)
+                    }
+                })
+        }
+    }
+
+    renderSubmitButton = () => {
+        if (this.props.openModal === "create") return <input type="submit" value="Ajouter la ville" />
+        else if (this.props.openModal === "edit") return <input type="submit" value="Modifier la ville" />
     }
 
     render() {
         return (
             <div>
-                <p className="log"  onClick={() => this.openModalFunc()} >
+                <p className="log" onClick={() => this.props.openModalFunc("create")} >
                     Ajout d'une ville
                 </p>
 
-                {this.state.openModal &&
+                {this.props.openModal &&
                     <div id="modal">
                         <div className="btn_close" onClick={() => this.openModalFunc()}>&times;</div>
                         <form onSubmit={this.handleSubmit}>
-                            <select name="country_id" onChange={this.handleChange}>
+                            <select name="country_id" value={this.state.country_id} onChange={this.handleChange}>
                                 <option value="">Sélectionner un pays</option>
                                 {this.props.countries.map(country => (
                                     <option key={country.id} value={country.id}>
@@ -97,9 +146,9 @@ class ModalAdmin extends Component {
                             <br />
                             <input type="text" name="location" placeholder="Les coordonnées GPS" value={this.state.location} onChange={this.handleChange} />
                             <br />
-                            <input type="file" name="filename" value={this.state.location} onChange={this.handleChange} />
+                            <input type="file" name="filename" value={this.state.filename} onChange={this.handleChange} />
                             <br />
-                            <input type="submit" value="Ajouter/Modifier la ville" />
+                            {this.renderSubmitButton()}
                         </form>
                     </div>
                 }

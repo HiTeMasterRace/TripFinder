@@ -26,8 +26,9 @@ class Modal extends Component {
 
     openModalFunc = () => {
         this.setState({ openModal: !this.state.openModal })
-        document.querySelector('.active_back') ? document.querySelector('.active_back').classList.remove('active_back') : document.querySelector('.back-modal').classList.add('active_back')
-
+        document.querySelector('.active_back')
+            ? document.querySelector('.active_back').classList.remove('active_back')
+            : document.querySelector('.back-modal').classList.add('active_back')
     }
 
     handleLogout = () => {
