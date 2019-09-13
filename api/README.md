@@ -6,4 +6,4 @@
 4. php artisan storage:link
 5. php artisan migrate:fresh --seed
 6. php artisan passport:install
-7. php artisan passport:install
+7. php artisan passport:keys
