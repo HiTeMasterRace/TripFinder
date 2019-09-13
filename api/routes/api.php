@@ -14,18 +14,19 @@ use Illuminate\Http\Request;
 */
 
 Route::post('login','ConnectionController@login');
+
 Route::post('users', 'UserController@store');
+
 Route::get('cities', 'CityController@index');
+Route::get('cities/{city}', 'CityController@show');
+
+Route::get('countries', 'CountryController@index');
+Route::get('countries/{country}', 'CountryController@show');
+
+Route::get('continents', 'ContinentController@index');
 
 Route::group(['middleware' => ['auth:api']], function() {
     Route::post('logout','ConnectionController@logout');
-
-    Route::get('cities/{city}', 'CityController@show');
-
-    Route::get('continents', 'ContinentController@index');
-
-    Route::get('countries', 'CountryController@index');
-    Route::get('countries/{country}', 'CountryController@show');
 
     Route::get('search', 'CityController@search');
 
