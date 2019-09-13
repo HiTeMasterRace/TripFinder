@@ -39,20 +39,20 @@ class CityController extends Controller
 
             if ($res->country) {
                 $cities = $cities->filter(function($city, $key) use($res) {
-                    return $city->country->name == $res->country;
+                    return strtolower($city->country->name) == strtolower($res->country);
                 });
             }
 
             if ($res->continent) {
                 $cities = $cities->filter(function($city, $key) use($res) {
-                    return $city->country->continent->name == $res->continent;
+                    return strtolower($city->country->continent->name) == strtolower($res->continent);
                 });
             }
 
             if ($res->type) {
                 $cities = $cities->filter(function($city, $key) use($res) {
                     return $city->types->some(function($type, $key) use ($res) {
-                        return $type->name == $res->type;
+                        return strtolower($type->name) == strtolower($res->type);
                     });
                 });
             }
