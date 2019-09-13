@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
 Route::get('cities/{city}', 'CityController@show');
 Route::get('cities', 'CityController@index');
 
@@ -26,8 +27,9 @@ Route::get('countries/{country}', 'CountryController@show');
 
 Route::get('search', 'CityController@search');
 
-
 Route::get('users/{id}', 'UserController@show');
 Route::post('users', 'UserController@store');
 Route::put('users/{id}', 'UserController@update');
 Route::delete('users/{id}', 'UserController@destroy');
+
+Route::post('login','ConnectionController@login');
