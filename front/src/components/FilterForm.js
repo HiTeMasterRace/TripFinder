@@ -6,8 +6,6 @@ import Slider from 'rc-slider';
 
 import 'rc-slider/assets/index.css';
 
-import City from './City';
-
 import mountain from '../assets/images/mountain.png'
 import sea from '../assets/images/sea.png'
 import culture from '../assets/images/culture.png'
@@ -18,7 +16,6 @@ const Range = Slider.Range
 
 class FilterForm extends Component {
     state = {
-        cities: [],
         continents: [],
         continent: "",
         countries: [],
@@ -31,29 +28,8 @@ class FilterForm extends Component {
     }
 
     componentDidMount() {
-        this.getCities()
         this.getCountries()
         this.getContinents()
-    }
-
-    getCities() {
-        axios({
-            method: "GET",
-            url: "https://allwebsite.ovh/api/cities",
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-                "Accept": "application/json"
-            }
-        })
-            .then(res => {
-                if (res.status === 200) {
-                    console.log(res.data)
-
-                    const cities = res.data
-
-                    this.setState({ cities })
-                }
-            })
     }
 
     getCountries() {
@@ -121,13 +97,17 @@ class FilterForm extends Component {
     send = () => {
         document.querySelector('.btn_find').classList.add('clicked');
 
-        const { minBudget, maxBudget, minTemp, maxTemp, country, continent } = this.state
+        const { minBudget, maxBudget, minTemp, maxTemp, country, continent, type } = this.state
 
-        let URL_API = `https://allwebsite.ovh/api/search?minTmp=${minTemp}&maxTmp=${maxTemp}&minBudget=${minBudget}&maxBudget=${maxBudget}`
+        let URL_API = `https://e7fda28f.ngrok.io/api/search?minTmp=${minTemp}&maxTmp=${maxTemp}&minBudget=${minBudget}&maxBudget=${maxBudget}`
 
         if (country) URL_API += `&country=${country}`
 
         if (continent) URL_API += `&continent=${continent}`
+
+        if (type) URL_API += `&type=${type}`
+
+        console.log(URL_API)
 
         axios({
             method: "GET",
@@ -157,7 +137,9 @@ class FilterForm extends Component {
     handleType = (e) => {
         const value = e.target.name
 
-        console.log(value)
+        this.setState({
+            type: value
+        })
     }
 
     handleBudget = (value) => {
@@ -177,59 +159,49 @@ class FilterForm extends Component {
     render() {
         return (
             <div>
-                <div className="banner">
-                    <div className="container_video">
-                        <video width="" height="" autoPlay muted loop id="bgvid">
-                            <source src="https://allwebsite.ovh/video-back.mp4" type="video/webm" />
-                        </video>
+                <div className="containerCarousel">
+                    <div className="container_item">
+                        <div onClick={() => this.switchForm("price")}>Prix</div>
+                        <div onClick={() => this.switchForm("place")}>Lieux</div>
+                        <div onClick={() => this.switchForm("temp")}>Température</div>
+                        <div onClick={() => this.switchForm("type")}>Type de voyage</div>
                     </div>
-                    <div className="pos">
-                        <h1>Trip Finder</h1>
-                        <div className="containerCarousel">
-                            <div className="container_item">
-                                <div onClick={() => this.switchForm("price")}>Prix</div>
-                                <div onClick={() => this.switchForm("place")}>Lieux</div>
-                                <div onClick={() => this.switchForm("temp")}>Température</div>
-                                <div onClick={() => this.switchForm("type")}>Type de voyage</div>
-                            </div>
-                            <div className="carousel_wrapper">
-                                <ul className="ul_carousel">
-                                    <li className="li_price active" data-position="0">
-                                        <Range defaultValue={[10, 1000]} min={10} max={1000} onChange={this.handleBudget} />
-                                        <p>{this.state.minBudget}€ -> {this.state.maxBudget}€</p>
-                                    </li>
-                                    <li className="li_place" data-position="1">
-                                        <select name="continent" onChange={this.handle}>
-                                            <option value="">Sélectionner un continent</option>
-                                            {this.state.continents.map(continent => (
-                                                <option key={continent.id} value={continent.name}>
-                                                    {continent.name}
-                                                </option>
-                                            ))}
-                                        </select>
-                                        <select name="country" onChange={this.handle}>
-                                            <option value="">Sélectionner un pays</option>
-                                            {this.state.countries.map(country => (
-                                                <option key={country.id} value={country.name}>
-                                                    {country.name}
-                                                </option>
-                                            ))}
-                                        </select>
-                                    </li>
-                                    <li className="li_temp" data-position="2">
-                                        <Range defaultValue={[-10, 35]} min={-10} max={35} onChange={this.handleTemp} />
-                                        <p>{this.state.minTemp}°C -> {this.state.maxTemp}°C</p>
-                                    </li>
-                                    <li className="li_type" data-position="3">
-                                        <img className="img_type" src={mountain} name="Montagne" alt="Montagne" onClick={this.handleType} />
-                                        <img className="img_type" src={sea} name="Mer" alt="Mer" onClick={this.handleType} />
-                                        <img className="img_type" src={culture} name="Culture" alt="Culture" onClick={this.handleType} />
-                                        <img className="img_type" src={party} name="Vie nocturne" alt="Vie nocturne" onClick={this.handleType} />
-                                        <img className="img_type" src={sport} name="Sport" alt="Sport" onClick={this.handleType} />
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+                    <div className="carousel_wrapper">
+                        <ul className="ul_carousel">
+                            <li className="li_price active" data-position="0">
+                                <Range defaultValue={[10, 1000]} min={10} max={1000} onChange={this.handleBudget} />
+                                <p>{this.state.minBudget}€ -> {this.state.maxBudget}€</p>
+                            </li>
+                            <li className="li_place" data-position="1">
+                                <select name="continent" onChange={this.handle}>
+                                    <option value="">Sélectionner un continent</option>
+                                    {this.state.continents.map(continent => (
+                                        <option key={continent.id} value={continent.name}>
+                                            {continent.name}
+                                        </option>
+                                    ))}
+                                </select>
+                                <select name="country" onChange={this.handle}>
+                                    <option value="">Sélectionner un pays</option>
+                                    {this.state.countries.map(country => (
+                                        <option key={country.id} value={country.name}>
+                                            {country.name}
+                                        </option>
+                                    ))}
+                                </select>
+                            </li>
+                            <li className="li_temp" data-position="2">
+                                <Range defaultValue={[-10, 35]} min={-10} max={35} onChange={this.handleTemp} />
+                                <p>{this.state.minTemp}°C -> {this.state.maxTemp}°C</p>
+                            </li>
+                            <li className="li_type" data-position="3">
+                                <img className="img_type" src={mountain} name="montagne" alt="Montagne" onClick={this.handleType} />
+                                <img className="img_type" src={sea} name="plage" alt="plage" onClick={this.handleType} />
+                                <img className="img_type" src={culture} name="culture" alt="Culture" onClick={this.handleType} />
+                                <img className="img_type" src={party} name="vie nocturne" alt="Vie nocturne" onClick={this.handleType} />
+                                <img className="img_type" src={sport} name="sport" alt="Sport" onClick={this.handleType} />
+                            </li>
+                        </ul>
                     </div>
                 </div>
                 <button className="btn_find" onClick={this.send}>
@@ -238,9 +210,6 @@ class FilterForm extends Component {
                         <path id="paper-plane-icon" d="M462,54.955L355.371,437.187l-135.92-128.842L353.388,167l-179.53,124.074L50,260.973L462,54.955z M202.992,332.528v124.517l58.738-67.927L202.992,332.528z"></path>
                     </svg>
                 </button>
-                <div id="container_cities">
-                    {this.state.cities.map(city => <City key={city.id} city={city} />)}
-                </div>
             </div>
         );
     }

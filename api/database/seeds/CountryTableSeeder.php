@@ -33,7 +33,7 @@ class CountryTableSeeder extends Seeder
             'continent_id' => 4,
         ]);
         factory(Country::class)->create([
-            'name'=>'Angletette',
+            'name'=>'Angleterre',
             'continent_id' => 4,
         ]);
         factory(Country::class)->create([

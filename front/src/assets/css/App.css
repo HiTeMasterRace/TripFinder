@@ -86,7 +86,8 @@
 
 body {
   transition: all 0.15s;
-  outline: none; }
+  outline: none;
+  overflow-x: hidden; }
 
 .btn_find {
   font-size: 19px;
@@ -188,11 +189,16 @@ body {
     height: 388px;
     border: 1px solid #e0dede;
     margin: 15px;
-    overflow: hidden;
-    padding: 15px; }
+    overflow: hidden; }
+    #container_cities .City img {
+      width: 100%;
+      height: 195px;
+      object-fit: cover; }
     #container_cities .City:hover {
       cursor: pointer;
       box-shadow: 0 0 12px #ccc; }
+    #container_cities .City .info {
+      padding: 15px; }
 
 /* FONT */
 @font-face {
