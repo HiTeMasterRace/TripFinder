@@ -20,72 +20,13 @@ const Range = Slider.Range
 
 class FilterForm extends Component {
     state = {
-        continents: [],
         continent: "",
-        countries: [],
         country: "",
         type: "",
         minBudget: 10,
         maxBudget: 1000,
         minTemp: -10,
         maxTemp: 35,
-    }
-
-    componentDidMount() {
-        this.getCountries()
-        this.getContinents()
-    }
-
-    getCountries() {
-        axios({
-            method: "GET",
-            url: "https://allwebsite.ovh/api/countries",
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-                "Accept": "application/json",
-                "Content-Type": "application/json"
-            }
-        })
-            .then(res => {
-                if (res.status === 200) {
-                    const countries = res.data
-
-                    this.sortElements(countries)
-
-                    this.setState({ countries })
-                }
-            })
-    }
-
-    getContinents() {
-        axios({
-            method: "GET",
-            url: "https://allwebsite.ovh/api/continents",
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-                "Accept": "application/json",
-                "Content-Type": "application/json"
-            }
-        })
-            .then(res => {
-                if (res.status === 200) {
-                    let continents = res.data
-
-                    this.sortElements(continents)
-
-                    this.setState({ continents })
-                }
-            })
-    }
-
-    sortElements = (array) => {
-        array.sort((a, b) => {
-            if (a.name < b.name) { return -1; }
-            if (a.name > b.name) { return 1; }
-            return 0;
-        })
-
-        return array
     }
 
     switchForm = (critere) => {
@@ -107,7 +48,9 @@ class FilterForm extends Component {
 
         const { minBudget, maxBudget, minTemp, maxTemp, country, continent, type } = this.state
 
-        let URL_API = `https://e7fda28f.ngrok.io/api/search?minTmp=${minTemp}&maxTmp=${maxTemp}&minBudget=${minBudget}&maxBudget=${maxBudget}`
+        const token = localStorage.getItem("token")
+
+        let URL_API = `https://31579322.ngrok.io/api/search?minTmp=${minTemp}&maxTmp=${maxTemp}&minBudget=${minBudget}&maxBudget=${maxBudget}`
 
         if (country) URL_API += `&country=${country}`
 
@@ -121,12 +64,15 @@ class FilterForm extends Component {
             headers: {
                 "Access-Control-Allow-Origin": "*",
                 "Accept": "application/json",
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
             }
         })
             .then(res => {
                 if (res.status === 200) {
-                    console.log(res.data)
+                    const cities = res.data
+
+                    this.props.handleSearch(cities)
                 }
             })
     }
@@ -191,7 +137,7 @@ class FilterForm extends Component {
                                 <p>Ou souhaitez-vous aller ?</p>
                                 <select name="continent" onChange={this.handle}>
                                     <option value="">Sélectionner un continent</option>
-                                    {this.state.continents.map(continent => (
+                                    {this.props.continents.map(continent => (
                                         <option key={continent.id} value={continent.name}>
                                             {continent.name}
                                         </option>
@@ -199,7 +145,7 @@ class FilterForm extends Component {
                                 </select>
                                 <select name="country" onChange={this.handle}>
                                     <option value="">Sélectionner un pays</option>
-                                    {this.state.countries.map(country => (
+                                    {this.props.countries.map(country => (
                                         <option key={country.id} value={country.name}>
                                             {country.name}
                                         </option>

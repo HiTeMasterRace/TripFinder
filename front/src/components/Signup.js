@@ -26,7 +26,7 @@ class Signup extends Component {
 
         axios({
             method: "POST",
-            url: "https://e7fda28f.ngrok.io/api/users",
+            url: "https://31579322.ngrok.io/api/users",
             headers: {
                 "Access-Control-Allow-Origin": "*",
                 "Accept": "application/json"
@@ -42,22 +42,22 @@ class Signup extends Component {
                     console.log(res.data)
                 }
             })
-            .catch(err => {
-                console.log(err.response)
-            })
     }
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
-                <input type="mail" required name="email" value={this.state.email} onChange={this.handleChange} />
-                <br />
-                <input type="text" required name="name" value={this.state.name} onChange={this.handleChange} />
-                <br />
-                <input type="password" required name="password" value={this.state.password} onChange={this.handleChange} />
-                <br />
-                <input type="submit" value="S'inscrire" />
-            </form>
+            <div>
+                <form onSubmit={this.handleSubmit}>
+                    <input type="mail" required name="email" placeholder="Votre email" value={this.state.email} onChange={this.handleChange} />
+                    <br />
+                    <input type="text" required name="name" placeholder="Votre nom" value={this.state.name} onChange={this.handleChange} />
+                    <br />
+                    <input type="password" required name="password" placeholder="Votre mot de passe" value={this.state.password} onChange={this.handleChange} />
+                    <br />
+                    <input type="submit" value="Inscription" />
+                </form>
+                <p onClick={() => this.props.onTypeChange("login")} style={{ cursor: "pointer", userSelect: "none" }}>Déjà un compte ? Se connecter</p>
+            </div>
         );
     }
 }
