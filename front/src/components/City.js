@@ -10,7 +10,7 @@ const City = ({ city, is_admin }) => {
                 <div>
                     {is_admin === 1 &&
                         <div>
-                            <p>Modifier</p>
+                            {/* <img src={} alt="Modifier la ville"/> */}
                             {/* <p onClick={this.props.handleDelete(city.id)}>Supprimer</p> */}
                         </div>
                     }
