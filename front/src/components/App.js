@@ -17,7 +17,8 @@ class App extends Component {
     cities: [],
     continents: [],
     countries: [],
-    is_admin: 0
+    is_admin: 0,
+    name: ""
   };
 
   componentDidMount() {
@@ -30,7 +31,7 @@ class App extends Component {
   getUser = () => {
     axios({
       method: "GET",
-      url: "https://31579322.ngrok.io/api/me",
+      url: "https://allwebsite.ovh/api/me",
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Accept": "application/json",
@@ -44,16 +45,16 @@ class App extends Component {
           const name = res.data.name
           const is_admin = res.data.is_admin
 
-          localStorage.setItem("name", name)
-          this.setState({ is_admin })
+          this.setState({ name, is_admin })
         }
       })
+      .catch(err => console.log(err))
   }
 
   getCities = () => {
     axios({
       method: "GET",
-      url: "https://31579322.ngrok.io/api/cities",
+      url: "https://allwebsite.ovh/api/cities",
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Accept": "application/json",
@@ -72,7 +73,7 @@ class App extends Component {
   getCountries() {
     axios({
       method: "GET",
-      url: "https://31579322.ngrok.io/api/countries",
+      url: "https://allwebsite.ovh/api/countries",
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Accept": "application/json",
@@ -84,8 +85,6 @@ class App extends Component {
         if (res.status === 200) {
           const countries = res.data
 
-          console.log(countries)
-
           this.sortElements(countries)
 
           this.setState({ countries })
@@ -96,7 +95,7 @@ class App extends Component {
   getContinents() {
     axios({
       method: "GET",
-      url: "https://31579322.ngrok.io/api/continents",
+      url: "https://allwebsite.ovh/api/continents",
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Accept": "application/json",
@@ -129,6 +128,24 @@ class App extends Component {
     this.setState({ cities })
   }
 
+  handleModal = (action) => {
+
+  }
+
+  handleDelete = (city_id) => {
+    axios({
+      method: "DELETE",
+      url: `https://allwebsite.ovh/api/cities/${city_id}`,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      }
+    })
+      .then(res => console.log(res))
+  }
+
   render() {
     return (
       <div className="App">
@@ -137,13 +154,13 @@ class App extends Component {
           <div className="banner">
             <Video />
             <div className="pos">
-              <Modal />
+              <Modal name={this.state.name} />
               <h1>Trip Finder</h1>
               <FilterForm handleSearch={this.handleSearch} countries={this.state.countries} continents={this.state.continents} />
               <div id="container_cities">
-                {this.state.cities.map(city => <City key={city.id} city={city} />)}
+                {this.state.cities.map(city => <City key={city.id} city={city} is_admin={this.state.is_admin} />)}
               </div>
-              {this.state.is_admin === 1 && <ModalAdmin is_admin={this.state.is_admin} countries={this.state.countries} />}
+              {this.state.is_admin === 1 && <ModalAdmin is_admin={this.state.is_admin} handleDelete={this.handleDelete} countries={this.state.countries} />}
             </div>
           </div>
         </div>

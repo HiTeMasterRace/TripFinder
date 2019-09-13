@@ -50,7 +50,7 @@ class FilterForm extends Component {
 
         const token = localStorage.getItem("token")
 
-        let URL_API = `https://31579322.ngrok.io/api/search?minTmp=${minTemp}&maxTmp=${maxTemp}&minBudget=${minBudget}&maxBudget=${maxBudget}`
+        let URL_API = `https://allwebsite.ovh/api/search?minTmp=${minTemp}&maxTmp=${maxTemp}&minBudget=${minBudget}&maxBudget=${maxBudget}`
 
         if (country) URL_API += `&country=${country}`
 
@@ -75,6 +75,7 @@ class FilterForm extends Component {
                     this.props.handleSearch(cities)
                 }
             })
+            .catch(err => { alert("Vous devez être connecté pour pouvoir faire une recherche") })
     }
 
     handle = (e) => {
@@ -88,9 +89,9 @@ class FilterForm extends Component {
 
     handleType = (e) => {
         const value = e.target.name
-        var img = "";
-        if (img = document.querySelector('.img_focus'))
-            img.classList.remove('img_focus')
+        var img = document.querySelector('.img_focus');
+
+        if (img) img.classList.remove('img_focus')
 
         e.target.classList.add('img_focus')
 
@@ -130,8 +131,7 @@ class FilterForm extends Component {
                                 <div className="slider_budget">
                                     <Range defaultValue={[10, 1000]} min={10} max={1000} onChange={this.handleBudget} />
                                 </div>
-                                <p><img src={bourse} width="35" height="auto" /> {this.state.minBudget}€ et {this.state.maxBudget}€</p>
-
+                                <p><img src={bourse} alt="Bourse" width="35" height="auto" /> {this.state.minBudget}€ et {this.state.maxBudget}€</p>
                             </li>
                             <li className="li_place" data-position="1">
                                 <p>Ou souhaitez-vous aller ?</p>
@@ -159,7 +159,7 @@ class FilterForm extends Component {
                                     <Range defaultValue={[-10, 35]} min={-10} max={35} onChange={this.handleTemp} />
                                     <img src={iconhot} alt="Chaleur" />
                                 </div>
-                                <p><img src={temp} width="35" height="auto" />{this.state.minTemp}°C et {this.state.maxTemp}°C</p>
+                                <p><img src={temp} alt="Température" width="35" height="auto" />{this.state.minTemp}°C et {this.state.maxTemp}°C</p>
                             </li>
                             <li className="li_type" data-position="3">
                                 <p>Quel type de voyage recherchez-vous ?</p>

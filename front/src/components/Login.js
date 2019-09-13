@@ -24,7 +24,7 @@ class Login extends Component {
 
         axios({
             method: "POST",
-            url: "https://31579322.ngrok.io/api/login",
+            url: "https://allwebsite.ovh/api/login",
             headers: {
                 "Access-Control-Allow-Origin": "*",
                 "Accept": "application/json",
@@ -37,8 +37,6 @@ class Login extends Component {
         })
             .then(res => {
                 if (res.status === 200) {
-                    console.log(res)
-
                     const token = res.data.access_token
 
                     localStorage.setItem("token", token)
@@ -46,6 +44,7 @@ class Login extends Component {
                     this.setState({ email: "", password: "" })
                 }
             })
+            .catch(err => console.log(err))
     }
 
     render() {

@@ -45,15 +45,15 @@ class Modal extends Component {
                 .then(res => {
                     if (res.status === 200) {
                         localStorage.removeItem("token");
-                        localStorage.removeItem("name");
                     }
+                })
+                .catch(err => {
+                    localStorage.removeItem("token");
                 })
         }
     }
 
     render() {
-        const name = localStorage.getItem("name")
-
         if (!token) return (
             <div>
                 <p className="log" onClick={() => this.openModalFunc()}>

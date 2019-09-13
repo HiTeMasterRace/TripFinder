@@ -43,11 +43,9 @@ class ModalAdmin extends Component {
 
         if (this.state.filename) data = { ...data, description: this.state.filename }
 
-        console.log(this.state.country_id)
-
         axios({
             method: "POST",
-            url: "https://31579322.ngrok.io/api/cities",
+            url: "https://allwebsite.ovh/api/cities",
             headers: {
                 "Access-Control-Allow-Origin": "*",
                 "Accept": "application/json",
@@ -67,7 +65,7 @@ class ModalAdmin extends Component {
         return (
             <div>
                 <p onClick={() => this.setState({ openModal: !this.state.openModal })} >
-                    Ajout/Modification d'une ville
+                    Ajout d'une ville
                 </p>
 
                 {this.state.openModal &&

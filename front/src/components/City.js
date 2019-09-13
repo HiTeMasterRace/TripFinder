@@ -1,7 +1,6 @@
 import React from 'react';
 
-
-const City = ({ city }) => {
+const City = ({ city, is_admin }) => {
     return (
         <div className="City">
             <div className="img_city">
@@ -9,6 +8,12 @@ const City = ({ city }) => {
             </div>
             <div className="info">
                 <div>
+                    {is_admin === 1 &&
+                        <div>
+                            <p>Modifier</p>
+                            {/* <p onClick={this.props.handleDelete(city.id)}>Supprimer</p> */}
+                        </div>
+                    }
                     <div className="flex flex-space-between">
                         <p>{city.budget}€</p>
                         <p>{city.temperature}°C</p>
