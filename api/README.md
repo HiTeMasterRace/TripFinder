@@ -1,5 +1,6 @@
 # API
 
+0. Installer Laravel
 1. cp .env.example .env
 2. composer install
 3. php artisan key:generate
