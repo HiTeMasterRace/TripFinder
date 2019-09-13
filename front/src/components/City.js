@@ -2,13 +2,16 @@ import React from 'react';
 
 const City = ({ city }) => {
     return (
-        <div className="City" style={{ backgroundImage: `url(https://allwebsite.ovh/${city.filename})`, width: "100%", height: "auto" }}>
+        <div className="City">
+            <img src={`https://allwebsite.ovh/${city.filename}`} width alt ="Photo de la ville"/>
             <div>
                 <p>{city.budget}€</p>
             </div>
-            <p>{city.name} - {city.country_name}</p>
-            <p>{city.temperature}°C</p>
-            <p>{city.description}</p>
+            <div className="info">
+                <p>{city.name} - {city.country_name}</p>
+                <p>{city.temperature}°C</p>
+                <p>{city.description}</p>
+            </div>
         </div>
     )
 }
