@@ -97,8 +97,13 @@ class FilterForm extends Component {
         elemUL.style.transform = "translateX(-" + pos * elemLI.offsetWidth + "px)";
     }
 
+    reverse = () => {
+        document.querySelector('.btn_find').classList.remove('clicked');
+    }
+
     send = () => {
         document.querySelector('.btn_find').classList.add('clicked');
+        setTimeout(() => this.reverse(), 5000);
 
         const { minBudget, maxBudget, minTemp, maxTemp, country, continent, type } = this.state
 
@@ -137,8 +142,8 @@ class FilterForm extends Component {
 
     handleType = (e) => {
         const value = e.target.name
-        var img ="";
-        if ( img = document.querySelector('.img_focus'))
+        var img = "";
+        if (img = document.querySelector('.img_focus'))
             img.classList.remove('img_focus')
 
         e.target.classList.add('img_focus')
@@ -175,14 +180,15 @@ class FilterForm extends Component {
                     <div className="carousel_wrapper">
                         <ul className="ul_carousel">
                             <li className="li_price active" data-position="0">
+                                <p>Quel est votre budget ?</p>
                                 <div className="slider_budget">
                                     <Range defaultValue={[10, 1000]} min={10} max={1000} onChange={this.handleBudget} />
                                 </div>
-                                <p><img src={bourse} width="35" height="auto"/> {this.state.minBudget}€ et {this.state.maxBudget}€</p>
+                                <p><img src={bourse} width="35" height="auto" /> {this.state.minBudget}€ et {this.state.maxBudget}€</p>
 
                             </li>
                             <li className="li_place" data-position="1">
-                                <p>Vers ou souhaitez-vous aller ?</p>
+                                <p>Ou souhaitez-vous aller ?</p>
                                 <select name="continent" onChange={this.handle}>
                                     <option value="">Sélectionner un continent</option>
                                     {this.state.continents.map(continent => (
@@ -203,16 +209,16 @@ class FilterForm extends Component {
                             <li className="li_temp" data-position="2">
                                 <p>Quelle serait la température idéale ?</p>
                                 <div className="slider_temp">
-                                    <img src={iconcold} alt="Fraicheur"/>
+                                    <img src={iconcold} alt="Fraicheur" />
                                     <Range defaultValue={[-10, 35]} min={-10} max={35} onChange={this.handleTemp} />
-                                    <img src={iconhot} alt="Chaleur"/>
+                                    <img src={iconhot} alt="Chaleur" />
                                 </div>
-                                <p><img src={temp} width="35" height="auto"/>{this.state.minTemp}°C et {this.state.maxTemp}°C</p>
+                                <p><img src={temp} width="35" height="auto" />{this.state.minTemp}°C et {this.state.maxTemp}°C</p>
                             </li>
                             <li className="li_type" data-position="3">
-                                <p>Quel type de voyage recherhcez-vous ?</p>
+                                <p>Quel type de voyage recherchez-vous ?</p>
                                 <div className="container">
-                                    <img className="img_type" src={mountain} name="montagne" alt="Montagne" onClick={this.handleType}/>
+                                    <img className="img_type" src={mountain} name="montagne" alt="Montagne" onClick={this.handleType} />
                                     <img className="img_type" src={sea} name="plage" alt="plage" onClick={this.handleType} />
                                     <img className="img_type" src={culture} name="culture" alt="Culture" onClick={this.handleType} />
                                     <img className="img_type" src={party} name="vie nocturne" alt="Vie nocturne" onClick={this.handleType} />

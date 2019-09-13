@@ -5,6 +5,13 @@
   flex-direction: column;
   height: 100%; }
 
+.flex {
+  display: flex; }
+
+.flex-space-between {
+  justify-content: space-between;
+  flex-wrap: wrap; }
+
 /* CSS APP */
 .App {
   width: 100%;
@@ -66,10 +73,9 @@
         cursor: pointer;
         font-weight: 700;
         margin: 0 5px;
-        color: black; }
-        .App .containerCarousel .container_item div:hover {
-          background-color: #e6e6e6;
-          border-radius: 10px; }
+        color: black;
+        background-color: #e6e6e6;
+        border-radius: 10px; }
       .App .containerCarousel .container_item .item_focus {
         background-color: #cff5b3;
         border-radius: 10px;
@@ -250,7 +256,7 @@ body {
       box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22); }
     #container_cities .City:hover > img {
       box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22); }
-    #container_cities .City img {
+    #container_cities .City .img_city img {
       width: 170px;
       height: 170px;
       display: block;
@@ -260,10 +266,22 @@ body {
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
       transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
     #container_cities .City .info {
-      padding: 15px; }
+      padding: 15px;
+      margin-top: 10px; }
+      #container_cities .City .info .flex p {
+        margin: 0;
+        color: gray; }
+      #container_cities .City .info .banner_price p {
+        font-size: 22px;
+        margin: 0; }
       #container_cities .City .info .description {
-        max-height: 45px;
+        max-height: 85px;
         overflow: hidden; }
+      #container_cities .City .info .name {
+        font-family: Pacifico;
+        font-weight: 300;
+        font-size: 22px;
+        margin: 0; }
 
 /* FONT */
 @font-face {
