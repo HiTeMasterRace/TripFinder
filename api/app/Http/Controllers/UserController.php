@@ -16,13 +16,13 @@ class UserController extends Controller
         $data = request()->validate([
             'email' => 'required|email|unique:users',
             'name'  => 'required|string|max:50',
-            'password'  => 'required'
+            'password'  => 'required',
         ]);
 
         return User::create([
             'name'=>$data['name'],
             'email'=>$data['email'],
-            'password'=>Hash::make($data['password']),
+            'password'=>bcrypt($data['password'])
         ]);
     }
 
@@ -41,9 +41,6 @@ class UserController extends Controller
         if($res['email']){
             $user->email = $res->email;
         }
-        if($res['password']){
-            $user->password = $res->password;
-        }
 
         $user->save();
         return $user;
@@ -53,10 +50,10 @@ class UserController extends Controller
         $user = User::find($id);
         if($user){
             $user->delete();
-            return response('User deleted', 200)
+            return response('User deleted', 201)
                   ->header('Content-Type', 'text/plain');
         }else{
-            return response('User dosen\'t exist', 200)
+            return response('User dosen\'t exist', 400)
                   ->header('Content-Type', 'text/plain');
         }
     }
