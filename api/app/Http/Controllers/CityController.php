@@ -26,27 +26,39 @@ class CityController extends Controller
     public function search()
     {
         $res = request();
-        $cities = City::all();
+        $cities = CityResource::collection(City::all());
 
         if (count($_GET) != 0) {
             if ($res->minTmp && $res->maxTmp) {
                 $cities = $cities->whereBetween('temperature', [$res->minTmp, $res->maxTmp]);
             }
 
-            if ($res->name) {
-                $cities = $cities->where('name', '=', $res->name);
-            }
-
             if ($res->minBudget && $res->maxBudget) {
                 $cities = $cities->whereBetween('budget', [$res->minBudget, $res->maxBudget]);
             }
 
-            if ($res->continent) {
-                $cities = $cities->where('continent', '=', $res->continent);
+            if ($res->country) {
+                $cities = $cities->filter(function($city, $key) use($res) {
+                    return strtolower($city->country->name) == strtolower($res->country);
+                });
             }
 
-            return  CityResource::collection($cities->flatten());
+            if ($res->continent) {
+                $cities = $cities->filter(function($city, $key) use($res) {
+                    return strtolower($city->country->continent->name) == strtolower($res->continent);
+                });
+            }
+
+            if ($res->type) {
+                $cities = $cities->filter(function($city, $key) use($res) {
+                    return $city->types->some(function($type, $key) use ($res) {
+                        return strtolower($type->name) == strtolower($res->type);
+                    });
+                });
+            }
+
+            return  $cities->flatten();
         }
-        return CityResource::collection($cities);
+        return $cities;
     }
 }
