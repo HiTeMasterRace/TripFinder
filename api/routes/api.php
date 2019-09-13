@@ -41,4 +41,7 @@ Route::group(['middleware' => ['auth:api', 'admin']], function() {
     Route::post('cities', 'CityController@store');
     Route::patch('cities/{city}', 'CityController@update');
     Route::delete('cities/{city}', 'CityController@destroy');
+
+    Route::get('types', 'TypeController@index');
+    Route::get('types/{type}', 'TypeController@show');
 });

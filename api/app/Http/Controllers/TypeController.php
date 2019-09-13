@@ -11,11 +11,13 @@ use App\Type;
 
 class TypeController extends Controller
 {
-    public function show(Type $type){
+    public function show(Type $type)
+    {
         return $type->toJson();
     }
 
-    public function index(){
+    public function index()
+    {
         return Type::all()->toJson();
     }
 }
