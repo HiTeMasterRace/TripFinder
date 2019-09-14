@@ -1,5 +1,10 @@
 import React from 'react';
 
+import './../assets/css/City.css';
+
+import edit from '../assets/images/iconedit.png';
+import remove from '../assets/images/icondelete.png';
+
 const City = ({ city, is_admin, handleEdit, handleDelete }) => {
     return (
         <div className="City">
@@ -7,12 +12,11 @@ const City = ({ city, is_admin, handleEdit, handleDelete }) => {
                 <img src={`https://allwebsite.ovh/${city.filename}`} width="true" alt={`Ville de ${city.name}`} />
             </div>
             <div className="info">
-                <div>
+                <div className="content">
                     {is_admin === 1 &&
-                        <div>
-                            {/* <img src={} alt="Modifier la ville"/> */}
-                            <p onClick={() => handleEdit(city.id)}>Modifier</p>
-                            <p onClick={() => handleDelete(city.id)}>Supprimer</p>
+                        <div className="panel_action">
+                            <img className="edit_city" src={edit} alt="Modifier la ville" onClick={() => handleEdit(city.id)} title="Modifier cette ville" />
+                            <img className="remove_city" src={remove} alt="Modifier la ville" onClick={() => handleDelete(city.id)} title="Supprimer cette ville" />
                         </div>
                     }
                     <div className="flex flex-space-between">
@@ -21,7 +25,7 @@ const City = ({ city, is_admin, handleEdit, handleDelete }) => {
                     </div>
                     <p className="name">{city.name} - {city.country_name}</p>
 
-                    <p className="description">{city.description}</p>
+                    <p>{city.description}</p>
                 </div>
             </div>
         </div>

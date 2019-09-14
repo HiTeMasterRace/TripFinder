@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 
+import './../assets/css/Modal.css';
+
 import Login from './Login'
 import Signup from './Signup'
 
