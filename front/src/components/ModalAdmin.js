@@ -61,6 +61,8 @@ class ModalAdmin extends Component {
     handleSubmit = (e) => {
         const token = localStorage.getItem("token")
 
+        e.preventDefault();
+
         let data = {
             country_id: this.state.country_id,
             name: this.state.name,
@@ -89,6 +91,8 @@ class ModalAdmin extends Component {
                 .then(res => {
                     if (res.status === 200) {
                         console.log(res.data)
+
+                        return window.location.reload();
                     }
                 })
         } else if (this.props.openModal === "edit") {
@@ -106,6 +110,8 @@ class ModalAdmin extends Component {
                 .then(res => {
                     if (res.status === 200) {
                         console.log(res.data)
+
+                        return window.location.reload();
                     }
                 })
         }
@@ -138,15 +144,15 @@ class ModalAdmin extends Component {
                             <br />
                             <input type="text" required name="name" placeholder="Le nom de la ville" value={this.state.name} onChange={this.handleChange} />
                             <br />
+                            <label>Le budget moyen</label>
                             <input type="number" required name="budget" placeholder="Le budget moyen" min={0} value={this.state.budget} onChange={this.handleChange} />
                             <br />
+                            <label>La température moyenne</label>
                             <input type="number" required name="temp" placeholder="La température moyenne" value={this.state.temp} onChange={this.handleChange} />
                             <br />
                             <input type="textarea" name="description" placeholder="La description" value={this.state.description} onChange={this.handleChange} />
                             <br />
                             <input type="text" name="location" placeholder="Les coordonnées GPS" value={this.state.location} onChange={this.handleChange} />
-                            <br />
-                            <input type="file" name="filename" value={this.state.filename} onChange={this.handleChange} />
                             <br />
                             {this.renderSubmitButton()}
                         </form>

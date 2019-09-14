@@ -107,7 +107,7 @@ class App extends Component {
     })
       .then(res => {
         if (res.status === 200) {
-          let continents = res.data
+          const continents = res.data
 
           this.sortElements(continents)
 
@@ -166,6 +166,8 @@ class App extends Component {
       })
         .then(res => {
           alert("La ville a été supprimée")
+
+          return window.location.reload()
         })
     }
   }

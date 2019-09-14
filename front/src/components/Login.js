@@ -20,7 +20,7 @@ class Login extends Component {
     }
 
     handleSubmit = (e) => {
-        e.preventDefault()
+        e.preventDefault();
 
         axios({
             method: "POST",
@@ -42,9 +42,11 @@ class Login extends Component {
                     localStorage.setItem("token", token)
 
                     this.setState({ email: "", password: "" })
+
+                    return window.location.reload()
                 }
             })
-            .catch(err => console.log(err))
+            .catch(err => console.log(err.response))
     }
 
     render() {

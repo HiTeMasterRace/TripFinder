@@ -22,7 +22,7 @@ class Signup extends Component {
     }
 
     handleSubmit = (e) => {
-        e.preventDefault()
+        e.preventDefault();
 
         axios({
             method: "POST",
@@ -32,16 +32,15 @@ class Signup extends Component {
                 "Accept": "application/json"
             },
             data: {
-                email: this.state.email,
-                name: this.state.name,
-                password: this.state.password,
+                "email": this.state.email,
+                "name": this.state.name,
+                "password": this.state.password,
             }
         })
             .then(res => {
-                if (res.status === 200) {
-                    console.log(res.data)
-                }
+                if (res.status === 201) return window.location.reload()
             })
+            .catch(err => console.log(err.response))
     }
 
     render() {

@@ -33,7 +33,9 @@ class Modal extends Component {
             : document.querySelector('.back-modal').classList.add('active_back')
     }
 
-    handleLogout = () => {
+    handleLogout = (e) => {
+        e.preventDefault();
+
         if (window.confirm("Êtes-vous sûr de vous déconnecter ?")) {
             axios({
                 method: "POST",
@@ -48,6 +50,8 @@ class Modal extends Component {
                 .then(res => {
                     if (res.status === 200) {
                         localStorage.removeItem("token");
+
+                        return window.location.reload()
                     }
                 })
                 .catch(err => {
