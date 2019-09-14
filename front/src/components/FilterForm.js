@@ -116,7 +116,7 @@ class FilterForm extends Component {
 
     render() {
         return (
-            <div>
+            <div id="container_filter_form">
                 <div className="containerCarousel">
                     <div className="container_item">
                         <div onClick={() => this.switchForm("price")} className="item_price item_focus">Prix</div>

@@ -25,7 +25,7 @@ const City = ({ city, is_admin, handleEdit, handleDelete }) => {
                     </div>
                     <p className="name">{city.name} - {city.country_name}</p>
 
-                    <p>{city.description}</p>
+                    <p className="description">{city.description}</p>
                 </div>
             </div>
         </div>
