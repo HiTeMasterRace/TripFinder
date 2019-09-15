@@ -24,7 +24,7 @@ class Login extends Component {
 
         axios({
             method: "POST",
-            url: "https://localhost:8000/api/login",
+            url: "http://localhost:8000/api/login",
             headers: {
                 "Access-Control-Allow-Origin": "*",
                 "Accept": "application/json",

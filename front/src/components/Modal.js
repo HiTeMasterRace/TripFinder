@@ -39,7 +39,7 @@ class Modal extends Component {
         if (window.confirm("Êtes-vous sûr de vous déconnecter ?")) {
             axios({
                 method: "POST",
-                url: "https://localhost:8000/api/logout",
+                url: "http://localhost:8000/api/logout",
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Accept": "application/json",

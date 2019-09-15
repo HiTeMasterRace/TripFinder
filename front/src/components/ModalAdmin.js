@@ -79,7 +79,7 @@ class ModalAdmin extends Component {
         if (this.props.openModal === "create") {
             axios({
                 method: "POST",
-                url: "https://localhost:8000/api/cities",
+                url: "http://localhost:8000/api/cities",
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Accept": "application/json",
@@ -98,7 +98,7 @@ class ModalAdmin extends Component {
         } else if (this.props.openModal === "edit") {
             axios({
                 method: "PATCH",
-                url: `https://localhost:8000/api/cities/${this.state.city_id}`,
+                url: `http://localhost:8000/api/cities/${this.state.city_id}`,
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Accept": "application/json",
