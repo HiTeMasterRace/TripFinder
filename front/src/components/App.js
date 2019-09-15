@@ -33,7 +33,7 @@ class App extends Component {
   getUser = () => {
     axios({
       method: "GET",
-      url: "https://allwebsite.ovh/api/me",
+      url: "https://localhost:8000/api/me",
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Accept": "application/json",
@@ -56,7 +56,7 @@ class App extends Component {
   getCities = () => {
     axios({
       method: "GET",
-      url: "https://allwebsite.ovh/api/cities",
+      url: "https://localhost:8000/api/cities",
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Accept": "application/json",
@@ -75,7 +75,7 @@ class App extends Component {
   getCountries() {
     axios({
       method: "GET",
-      url: "https://allwebsite.ovh/api/countries",
+      url: "https://localhost:8000/api/countries",
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Accept": "application/json",
@@ -97,7 +97,7 @@ class App extends Component {
   getContinents() {
     axios({
       method: "GET",
-      url: "https://allwebsite.ovh/api/continents",
+      url: "https://localhost:8000/api/continents",
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Accept": "application/json",
@@ -156,7 +156,7 @@ class App extends Component {
     if (window.confirm("Êtes-vous sûr de vouloir supprimer cette ville ?")) {
       axios({
         method: "DELETE",
-        url: `https://allwebsite.ovh/api/cities/${city_id}`,
+        url: `https://localhost:8000/api/cities/${city_id}`,
         headers: {
           "Access-Control-Allow-Origin": "*",
           "Accept": "application/json",

@@ -26,7 +26,7 @@ class Signup extends Component {
 
         axios({
             method: "POST",
-            url: "https://allwebsite.ovh/api/users",
+            url: "https://localhost:8000/api/users",
             headers: {
                 "Access-Control-Allow-Origin": "*",
                 "Accept": "application/json"

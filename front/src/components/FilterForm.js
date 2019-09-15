@@ -47,7 +47,7 @@ class FilterForm extends Component {
 
         const token = localStorage.getItem("token")
 
-        let URL_API = `https://allwebsite.ovh/api/search?minTmp=${minTemp}&maxTmp=${maxTemp}&minBudget=${minBudget}&maxBudget=${maxBudget}`
+        let URL_API = `https://localhost:8000/api/search?minTmp=${minTemp}&maxTmp=${maxTemp}&minBudget=${minBudget}&maxBudget=${maxBudget}`
 
         if (country) URL_API += `&country=${country}`
 
