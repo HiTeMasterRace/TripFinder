@@ -180,7 +180,7 @@ class App extends Component {
         <div className="back-modal"></div>
         <div className="vertical-center">
           <div className="banner">
-            {/* <Video /> */}
+            <Video />
             <div className="pos">
               <div className="flex flex-space-between">
                 <Modal name={this.state.name} />
