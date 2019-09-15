@@ -8,6 +8,8 @@ import FilterForm from './FilterForm';
 import City from './City';
 import ModalAdmin from './ModalAdmin'
 
+import URL_API from '../constant/url'
+
 import './../assets/css/App.css';
 
 const token = localStorage.getItem("token")
@@ -33,7 +35,7 @@ class App extends Component {
   getUser = () => {
     axios({
       method: "GET",
-      url: "http://localhost:8000/api/me",
+      url: `${URL_API}/me`,
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Accept": "application/json",
@@ -56,7 +58,7 @@ class App extends Component {
   getCities = () => {
     axios({
       method: "GET",
-      url: "http://localhost:8000/api/cities",
+      url: `${URL_API}/cities`,
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Accept": "application/json",
@@ -75,7 +77,7 @@ class App extends Component {
   getCountries() {
     axios({
       method: "GET",
-      url: "http://localhost:8000/api/countries",
+      url: `${URL_API}/countries`,
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Accept": "application/json",
@@ -97,7 +99,7 @@ class App extends Component {
   getContinents() {
     axios({
       method: "GET",
-      url: "http://localhost:8000/api/continents",
+      url: `${URL_API}/continents`,
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Accept": "application/json",
@@ -156,7 +158,7 @@ class App extends Component {
     if (window.confirm("Êtes-vous sûr de vouloir supprimer cette ville ?")) {
       axios({
         method: "DELETE",
-        url: `http://localhost:8000/api/cities/${city_id}`,
+        url: `${URL_API}/cities/${city_id}`,
         headers: {
           "Access-Control-Allow-Origin": "*",
           "Accept": "application/json",
@@ -178,7 +180,7 @@ class App extends Component {
         <div className="back-modal"></div>
         <div className="vertical-center">
           <div className="banner">
-            <Video />
+            {/* <Video /> */}
             <div className="pos">
               <div className="flex flex-space-between">
                 <Modal name={this.state.name} />

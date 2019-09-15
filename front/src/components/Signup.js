@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import axios from 'axios';
 
+import URL_API from '../constant/url'
+
 class Signup extends Component {
     constructor(props) {
         super(props);
@@ -26,7 +28,7 @@ class Signup extends Component {
 
         axios({
             method: "POST",
-            url: "http://localhost:8000/api/users",
+            url: `${URL_API}/users`,
             headers: {
                 "Access-Control-Allow-Origin": "*",
                 "Accept": "application/json"

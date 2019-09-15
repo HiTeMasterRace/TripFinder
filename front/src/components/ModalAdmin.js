@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import axios from 'axios';
 
+import URL_API from '../constant/url'
+
 class ModalAdmin extends Component {
     state = {
         openModal: "",
@@ -12,7 +14,14 @@ class ModalAdmin extends Component {
         temp: 0,
         description: "",
         location: "",
-        filename: ""
+        filename: "",
+        types: [
+            { id: 1, name: "Montagne", isChecked: false },
+            { id: 2, name: "Plage", isChecked: false },
+            { id: 3, name: "Vie nocturne", isChecked: false },
+            { id: 4, name: "Culture", isChecked: false },
+            { id: 5, name: "Sport", isChecked: false },
+        ]
     };
 
     componentDidUpdate(prevProps, prevState) {
@@ -22,6 +31,25 @@ class ModalAdmin extends Component {
     editPlaceholder = (city) => {
         const country_id = this.props.countries.find(country => country.name === city.country_name).id
 
+        axios({
+            method: "GET",
+            url: `${URL_API}/cities/${city.id}`
+        })
+            .then(res => {
+                if (res.status === 200) {
+                    let { types } = this.state
+
+                    res.data.types.forEach(type_selected => {
+                        types.forEach(type => {
+                            if (type.id === type_selected.id)
+                                type.isChecked = true
+                        })
+                    })
+
+                    this.setState({ types })
+                }
+            })
+
         this.setState({
             country_id,
             city_id: city.id,
@@ -29,13 +57,15 @@ class ModalAdmin extends Component {
             budget: city.budget,
             temp: city.temperature,
             description: city.description,
-            location: city.location
+            location: city.location,
         })
     }
 
     openModalFunc = () => {
+        this.state.types.forEach(type => type.isChecked = false)
+
         this.setState({
-            country: "",
+            country_id: "",
             name: "",
             budget: 0,
             temp: 0,
@@ -58,28 +88,51 @@ class ModalAdmin extends Component {
         })
     };
 
+    handleType = (e) => {
+        const name = e.target.name
+        const checked = e.target.checked
+
+        let { types } = this.state
+
+        types.forEach(type => {
+            if (type.name === name)
+                type.isChecked = checked
+        })
+
+        this.setState({ types })
+    }
+
     handleSubmit = (e) => {
         const token = localStorage.getItem("token")
 
         e.preventDefault();
 
         let data = {
-            country_id: this.state.country_id,
-            name: this.state.name,
-            budget: this.state.budget,
-            temperature: this.state.temp,
+            "country_id": this.state.country_id,
+            "name": this.state.name,
+            "budget": this.state.budget,
+            "temperature": this.state.temp,
         }
 
-        if (this.state.description) data = { ...data, description: this.state.description }
+        if (this.state.description) data = { ...data, "description": this.state.description }
 
-        if (this.state.location) data = { ...data, location: this.state.location }
+        if (this.state.location) data = { ...data, "location": this.state.location }
 
-        if (this.state.filename) data = { ...data, description: this.state.filename }
+        if (this.state.filename) data = { ...data, "filename": this.state.filename }
+
+        let types_selected = []
+
+        this.state.types.forEach(type => {
+            if(type.isChecked === true)
+                types_selected.push(type.id)
+        })
+
+        if(types_selected.length > 0) data = { ...data, "types": this.state.types_selected }
 
         if (this.props.openModal === "create") {
             axios({
                 method: "POST",
-                url: "http://localhost:8000/api/cities",
+                url: `${URL_API}/cities`,
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Accept": "application/json",
@@ -89,16 +142,13 @@ class ModalAdmin extends Component {
                 data
             })
                 .then(res => {
-                    if (res.status === 200) {
-                        console.log(res.data)
-
+                    if (res.status === 201)
                         return window.location.reload();
-                    }
                 })
         } else if (this.props.openModal === "edit") {
             axios({
                 method: "PATCH",
-                url: `http://localhost:8000/api/cities/${this.state.city_id}`,
+                url: `${URL_API}/cities/${this.state.city_id}`,
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Accept": "application/json",
@@ -108,11 +158,8 @@ class ModalAdmin extends Component {
                 data
             })
                 .then(res => {
-                    if (res.status === 200) {
-                        console.log(res.data)
-
+                    if (res.status === 200)
                         return window.location.reload();
-                    }
                 })
         }
     }
@@ -144,13 +191,31 @@ class ModalAdmin extends Component {
                             <br />
                             <input type="text" required name="name" placeholder="Le nom de la ville" value={this.state.name} onChange={this.handleChange} />
                             <br />
-                            <label>Le budget moyen</label>
-                            <input type="number" required name="budget" placeholder="Le budget moyen" min={0} value={this.state.budget} onChange={this.handleChange} />
+                            <label>
+                                Le budget moyen
+                                <input type="number" required name="budget" placeholder="Le budget moyen" min={0} value={this.state.budget} onChange={this.handleChange} />
+                            </label>
                             <br />
-                            <label>La température moyenne</label>
-                            <input type="number" required name="temp" placeholder="La température moyenne" value={this.state.temp} onChange={this.handleChange} />
+                            <label>
+                                La température moyenne
+                                <input type="number" required name="temp" placeholder="La température moyenne" value={this.state.temp} onChange={this.handleChange} />
+                            </label>
                             <br />
                             <input type="textarea" name="description" placeholder="La description" value={this.state.description} onChange={this.handleChange} />
+                            <br />
+                            <label>Le(s) type(s) de voyage correspondant(s) à la ville</label>
+                            {this.state.types.map(type =>
+                                <div key={type.id}>
+                                    {type.name}
+                                    <input
+                                        type="checkbox"
+                                        name={type.name}
+                                        value={type.id}
+                                        checked={type.isChecked}
+                                        onChange={this.handleType}
+                                    />
+                                </div>
+                            )}
                             <br />
                             <input type="text" name="location" placeholder="Les coordonnées GPS" value={this.state.location} onChange={this.handleChange} />
                             <br />

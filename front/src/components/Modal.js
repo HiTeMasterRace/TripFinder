@@ -6,6 +6,8 @@ import './../assets/css/Modal.css';
 import Login from './Login'
 import Signup from './Signup'
 
+import URL_API from '../constant/url'
+
 const token = localStorage.getItem("token")
 
 class Modal extends Component {
@@ -39,7 +41,7 @@ class Modal extends Component {
         if (window.confirm("Êtes-vous sûr de vous déconnecter ?")) {
             axios({
                 method: "POST",
-                url: "http://localhost:8000/api/logout",
+                url: `${URL_API}/logout`,
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Accept": "application/json",

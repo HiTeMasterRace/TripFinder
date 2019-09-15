@@ -4,6 +4,8 @@ import axios from 'axios';
 
 import Slider from 'rc-slider';
 
+import URL_API from '../constant/url'
+
 import 'rc-slider/assets/index.css';
 
 import mountain from '../assets/images/mountain.png'
@@ -47,17 +49,17 @@ class FilterForm extends Component {
 
         const token = localStorage.getItem("token")
 
-        let URL_API = `http://localhost:8000/api/search?minTmp=${minTemp}&maxTmp=${maxTemp}&minBudget=${minBudget}&maxBudget=${maxBudget}`
+        let URL_API_FILTER = `${URL_API}/search?minTmp=${minTemp}&maxTmp=${maxTemp}&minBudget=${minBudget}&maxBudget=${maxBudget}`
 
-        if (country) URL_API += `&country=${country}`
+        if (country) URL_API_FILTER += `&country=${country}`
 
-        if (continent) URL_API += `&continent=${continent}`
+        if (continent) URL_API_FILTER += `&continent=${continent}`
 
-        if (type) URL_API += `&type=${type}`
+        if (type) URL_API_FILTER += `&type=${type}`
 
         axios({
             method: "GET",
-            url: URL_API,
+            url: URL_API_FILTER,
             headers: {
                 "Access-Control-Allow-Origin": "*",
                 "Accept": "application/json",
