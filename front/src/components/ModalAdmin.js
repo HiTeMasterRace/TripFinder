@@ -142,8 +142,7 @@ class ModalAdmin extends Component {
                 data
             })
                 .then(res => {
-                    //if (res.status === 201)
-                        //return window.location.reload();
+                    if (res.status === 201) return window.location.reload();
                 })
         } else if (this.props.openModal === "edit") {
             axios({
