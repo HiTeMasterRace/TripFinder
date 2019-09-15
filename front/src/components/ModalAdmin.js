@@ -123,11 +123,11 @@ class ModalAdmin extends Component {
         let types_selected = []
 
         this.state.types.forEach(type => {
-            if(type.isChecked === true)
+            if (type.isChecked === true)
                 types_selected.push(type.id)
         })
 
-        if(types_selected.length > 0) data = { ...data, "types": this.state.types_selected }
+        if (types_selected.length > 0) data = { ...data, "types": types_selected }
 
         if (this.props.openModal === "create") {
             axios({
@@ -142,8 +142,8 @@ class ModalAdmin extends Component {
                 data
             })
                 .then(res => {
-                    if (res.status === 201)
-                        return window.location.reload();
+                    //if (res.status === 201)
+                        //return window.location.reload();
                 })
         } else if (this.props.openModal === "edit") {
             axios({
